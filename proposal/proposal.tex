@@ -62,26 +62,36 @@ Our choice for the project this semester is SemEval 2015 Task 1. This task has t
 
 \section{Relevant Text}
 %− A review of the relevant literature; identify the state-of-the-art approach you will implement as your baseline.
-\textbf{Andrew, Goldberg (2007). Automatic Summarization}
+\begin{itemize}
+\item Andrew, Goldberg (2007). Automatic Summarization
+\item Hercules, Dalianis (2003). Porting and Evaluation of Automatic Summarization
+\item Wei Xu and Alan Ritter and Chris Callison-Burch and William B. Dolan and Yangfeng Ji (2014). Extracting Lexically Divergent Paraphrases from Twitter
+\item \textbf{These are in addition to the related readings on the SemEval page}
+\end{itemize}
+
 
 
 \section{Approach}
 %− An outline of the approach you plan to take: 
 %   (a) A description of the algorithms and approaches you plan to implement 
 \paragraph{}
-The great part about doing a project from SemEval is that all baseline models and data are given. For our baseline we have the option of choosing between two models. One is a logistic regression model with an f-score of 0.6, the other model is a weighted factorization matrix.
+The great part about doing a project from SemEval is that all baseline models and data are given. For our baseline we have the option of choosing between two models. One is a logistic regression model with an f-score of 0.6 using the included test and training data, the other model is a weighted factorization matrix with similar results. Both of these baselines are written in Python and for the purposes of our implementation may be rewritten to Java. This remains undecided as of this writing.
 
-%   (b) Tools you are planning to use
 \paragraph{}
-Given these baseline models we will likely improve them using state-of-the-art semantic analysis tools such as word2vec.
+The tools we plan to use are the standard NLP state-of-the-art toolkits such as POS taggers and sentiment analysers. All of which are well documented for use in both Java and Python.
+
 
 \section{Experiments \& Evaluation}
 %− An overall plan for experiments & evaluation
+Given these baseline models we will likely improve them using semantic analysis tools such as word2vec. We may also experiment with sentiment scores to see how it effects our results. The evaluation of our results has also been standardized for this task. Included with this task is an output evaluator which will grade our results giving us an f-score thus eliminating the need for complicated evaluation methods. This method was used for the competition and is the accepted standard to which we can reflect upon any improvements that we make.
 
 \section{Data}
 %− Real world data-set(s) that will be used for evaluation
- 
- 
+\paragraph{}
+The data for this project has been provided for us by the SemEval team. This data includes 4727 development sentence pairs, 972 test pairs, and 13063 pairs for training our model. The pairs are completely random and are organized into sets of semantically similar tweets with their respective paraphrases extracted into categories for use as a gold standard. Additional information regarding the structure of the data can be seen in the Extracting Lexically Divergent Paraphrases from Twitter paper above.
+
+
+%SCREW IT. NOT WORTH THE EFFORT.
 %\begin{thebibliography}{99}
 
 %\bibitem{gonzalez2012} Jonay I. Gonz\'{a}lez Hern\'{a}ndez, 
