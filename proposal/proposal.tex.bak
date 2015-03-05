@@ -62,17 +62,18 @@ Our choice for the project this semester is SemEval 2015 Task 1. This task has t
 
 \section{Relevant Text}
 %− A review of the relevant literature; identify the state-of-the-art approach you will implement as your baseline.
+\textbf{Andrew, Goldberg (2007). Automatic Summarization}
 
 
 \section{Approach}
 %− An outline of the approach you plan to take: 
 %   (a) A description of the algorithms and approaches you plan to implement 
 \paragraph{}
-The great part about doing a project from SemEval is that all baseline models and data are given. For our baseline we have the option of choosing between two models. One is a logistic regression model with an f-score of 0.6, the other model is a weighted factorization matrix. \cite{gonzalez2012}
+The great part about doing a project from SemEval is that all baseline models and data are given. For our baseline we have the option of choosing between two models. One is a logistic regression model with an f-score of 0.6, the other model is a weighted factorization matrix.
 
 %   (b) Tools you are planning to use
 \paragraph{}
-Given these baseline models we will likely improve them using state-of-the-art semantic analysis tools such as word2vec. Additi
+Given these baseline models we will likely improve them using state-of-the-art semantic analysis tools such as word2vec.
 
 \section{Experiments \& Evaluation}
 %− An overall plan for experiments & evaluation
@@ -81,19 +82,19 @@ Given these baseline models we will likely improve them using state-of-the-art s
 %− Real world data-set(s) that will be used for evaluation
  
  
-\begin{thebibliography}{99}
+%\begin{thebibliography}{99}
 
-\bibitem{gonzalez2012} Jonay I. Gonz\'{a}lez Hern\'{a}ndez, 
-Pilar Ruiz-Lapuente,	
-Hugo M. Tabernero,	
-David Montes,	
-Ramon Canal,	
-Javier M\'{e}ndez	
-and Luigi R. Bedin,
-{No surviving evolved companions of the progenitor of SN1006},
-Nature, {\bf 489}, 533-536 (2012).
+%\bibitem{gonzalez2012} Jonay I. Gonz\'{a}lez Hern\'{a}ndez, 
+%Pilar Ruiz-Lapuente,	
+%Hugo M. Tabernero,	
+%David Montes,	
+%Ramon Canal,	
+%Javier M\'{e}ndez	
+%and Luigi R. Bedin,
+%{No surviving evolved companions of the progenitor of SN1006},
+%Nature, {\bf 489}, 533-536 (2012).
 
-\end{thebibliography}
+%\end{thebibliography}
 
 
 
