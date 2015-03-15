@@ -406,6 +406,8 @@ if __name__ == "__main__":
     trainfilename = "../data/train.data"
     testfilename = "../data/test.data"
 
+    nltk.config_megam('../additionalsoftware/megam_i686.opt')
+
     # Training and Testing by precision/recall curve
     #PREvaluation()
 
@@ -413,7 +415,7 @@ if __name__ == "__main__":
     OneEvaluation()
 
     # write results into a file in the SemEval output format
-    outputfilename = "./systemoutputs/PIT2015_BASELINE_02_LG.output"
+    outputfilename = "../output/logisticregression.output"
     modelfilename = './baseline_logisticregression.model'
     OutputPredictions(modelfilename, outputfilename)
    
