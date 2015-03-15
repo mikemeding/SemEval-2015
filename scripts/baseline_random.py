@@ -11,14 +11,15 @@ import random
 
 if __name__ == "__main__":
 
-    testfilename = "../data/test.unlabelled.data"
-    outfilename = "./systemoutputs/PIT2015_BASELINE_01_random.output"
+    testfilename = "../data/trial.unlabeled"
+    outfilename = "../output/baseline_random.output"
 
     ntline = 0
     with open(testfilename) as tf:
         for tline in tf:
             tline = tline.strip()
-            if len(tline.split('\t')) == 6:
+            # we need unlabeled trial data
+            if len(tline.split('\t')) == 4:  # this should be 6.
                 ntline += 1
 
                 # output the results into a file
