@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/SemEval-2015.iml" filepath="$PROJECT_DIR$/.idea/SemEval-2015.iml" />
+      <module fileurl="file://$PROJECT_DIR$/semeval-task1/semeval-task1.iml" filepath="$PROJECT_DIR$/semeval-task1/semeval-task1.iml" />
     </modules>
   </component>
 </project>

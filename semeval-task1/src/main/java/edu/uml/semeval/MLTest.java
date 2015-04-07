@@ -33,7 +33,13 @@ public class MLTest {
 //        featureExtractors.add(new BaseFeatureExtractor());
         featureExtractors.add(new BaseModFeatureExtractor());
         featureExtractors.add(new ArkTweetNgramFeatureExtractor());
-        featureExtractors.add(new HarvardInquirerFeatureExtraction(new HarvardInquirer("resources/Harvard_inquirer/inqtabs.txt")));
+//        featureExtractors.add(new HarvardInquirerFeatureExtraction(new HarvardInquirer("resources/Harvard_inquirer/inqtabs.txt")));
+
+        // Relative file paths not working for me. (revert otherwise)
+        String current = new java.io.File( "." ).getCanonicalPath();
+//        System.out.println("Current dir:"+current);
+        featureExtractors.add(new HarvardInquirerFeatureExtraction(new HarvardInquirer(current+"/semeval-task1/resources/Harvard_inquirer/inqtabs.txt")));
+
         
         SemEvalData rawTrainData = new SemEvalData(SemEvalData.TRAINING_DATA_FILE);
         SemEvalData rawDevData = new SemEvalData(SemEvalData.DEV_DATA_FILE);

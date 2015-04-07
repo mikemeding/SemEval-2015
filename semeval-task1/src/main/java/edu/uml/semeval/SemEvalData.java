@@ -11,8 +11,10 @@ import cmu.arktweetnlp.Tagger.TaggedToken;
 
 public class SemEvalData {
 
-    public static final String TRAINING_DATA_FILE = "dataset/train.data";
-    public static final String DEV_DATA_FILE = "dataset/dev.data";
+    //    public static final String TRAINING_DATA_FILE = "dataset/train.data";
+//    public static final String DEV_DATA_FILE = "dataset/dev.data";
+    public static final String TRAINING_DATA_FILE = "semeval-task1/dataset/train.data";
+    public static final String DEV_DATA_FILE = "semeval-task1/dataset/dev.data";
 
     private List<Data> dataset;
 
@@ -41,20 +43,20 @@ public class SemEvalData {
 
             String[] origCleanSplit = origClean.split(" ");
             String[] candCleanSplit = candClean.split(" ");
-            
+
             int origTrendStart = getStartIndex(origCleanSplit, trendnameCleanSplit);
             int origTrendEnd = origTrendStart + trendnameCleanSplit.length - 1;
-            
+
             int candTrendStart = getStartIndex(candCleanSplit, trendnameCleanSplit);
             int candTrendEnd = candTrendStart + trendnameCleanSplit.length - 1;
-            
+
             int count = Integer.parseInt(split[4].substring(1, 2));
             boolean paraphrase = (count >= 3);
 
             // skip middle
-            if(count < 2 || count > 2) {
+            if (count < 2 || count > 2) {
                 Data datapoint = new Data(split[0], trendname, origsent, candsent, paraphrase, split[5],
-                        split[6], trendnameCleanSplit, 
+                        split[6], trendnameCleanSplit,
                         origCleanSplit, origTrendStart, origTrendEnd,
                         candCleanSplit, candTrendStart, candTrendEnd,
                         arkTag(origClean), arkTag(candClean));
@@ -81,23 +83,23 @@ public class SemEvalData {
 
         return tags;
     }
-    
+
     private int getStartIndex(String[] str, String[] contains) {
-        
-        for(int i = 0; i < str.length; i++) {
+
+        for (int i = 0; i < str.length; i++) {
             boolean found = true;
-            
-            for(int j = 0; j < contains.length; j++) {
-                if(!(str[i + j].contains(contains[j]))) {
+
+            for (int j = 0; j < contains.length; j++) {
+                if (!(str[i + j].contains(contains[j]))) {
                     found = false;
                 }
             }
-            
-            if(found) {
+
+            if (found) {
                 return i;
             }
         }
-        
+
         return -1;
     }
 
