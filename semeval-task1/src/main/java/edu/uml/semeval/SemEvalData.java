@@ -24,7 +24,9 @@ public class SemEvalData {
 
         dataset = new ArrayList<Data>();
         tagger = new Tagger();
-        tagger.loadModel("/cmu/arktweetnlp/model.20120919");
+//        tagger.loadModel("/cmu/arktweetnlp/model.20120919");
+        tagger.loadModel("semeval-task1/resources/ArkTweet/model.ritter_ptb_alldata_fixed.20130723");
+
 
         BufferedReader br = new BufferedReader(new FileReader(filePath));
 

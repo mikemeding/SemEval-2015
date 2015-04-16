@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.uml.semeval.featureextraction.*;
 import org.encog.Encog;
 import org.encog.engine.network.activation.ActivationSigmoid;
 import org.encog.ml.MLRegression;
@@ -19,11 +20,6 @@ import org.encog.neural.networks.training.propagation.resilient.ResilientPropaga
 
 import cmu.arktweetnlp.Tagger;
 import edu.uml.lexicon.HarvardInquirer;
-import edu.uml.semeval.featureextraction.ArkTweetNgramFeatureExtractor;
-import edu.uml.semeval.featureextraction.BaseFeatureExtractor;
-import edu.uml.semeval.featureextraction.BaseModFeatureExtractor;
-import edu.uml.semeval.featureextraction.FeatureExtractor;
-import edu.uml.semeval.featureextraction.HarvardInquirerFeatureExtraction;
 
 public class MLTest {
 
@@ -33,6 +29,9 @@ public class MLTest {
 //        featureExtractors.add(new BaseFeatureExtractor());
         featureExtractors.add(new BaseModFeatureExtractor());
         featureExtractors.add(new ArkTweetNgramFeatureExtractor());
+        // Negation detection feature extractor
+        featureExtractors.add(new NegationFeatureExtractor());
+
 //        featureExtractors.add(new HarvardInquirerFeatureExtraction(new HarvardInquirer("resources/Harvard_inquirer/inqtabs.txt")));
 
         // Relative file paths not working for me. (revert otherwise)
