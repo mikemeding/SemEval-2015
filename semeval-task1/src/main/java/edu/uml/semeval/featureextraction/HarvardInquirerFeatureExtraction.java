@@ -8,9 +8,13 @@ import edu.uml.semeval.Data;
 
 public class HarvardInquirerFeatureExtraction implements FeatureExtractor {
 
-//    public static final String[] CATEGORIES_TO_lOOK_FOR = "Positiv Negativ Pstv Affil Ngtv Hostile Strong Power Weak Submit Active Passive Pleasur Pain Feel Arousal EMOT Virtue Vice Ovrst Undrst Academ Doctrin Econ@ Exch ECON Exprsv Legal Milit Polit@ POLIT Relig Role COLL Work Ritual SocRel Race Kin@ MALE Female Nonadlt HU ANI PLACE Social Region Route Aquatic Land Sky Object Tool Food Vehicle BldgPt ComnObj NatObj BodyPt ComForm COM Say Need Goal Try Means Persist Complet Fail NatrPro Begin Vary Increas Decreas Finish Stay Rise Exert Fetch Travel Fall Think Know Causal Ought Perceiv Compare Eval@ EVAL Solve Abs@ ABS Quality Quan NUMB ORD CARD FREQ DIST Time@ TIME Space POS DIM Rel COLOR Self Our You Name Yes No Negate Intrj IAV DAV SV IPadj IndAdj PowGain PowLoss PowEnds PowAren PowCon PowCoop PowAuPt PowPt PowDoct PowAuth PowOth PowTot RcEthic RcRelig RcGain RcLoss RcEnds RcTot RspGain RspLoss RspOth RspTot AffGain AffLoss AffPt AffOth AffTot WltPt WltTran WltOth WltTot WlbGain WlbLoss WlbPhys WlbPsyc WlbPt WlbTot EnlGain EnlLoss EnlEnds EnlPt EnlOth EnlTot SklAsth SklPt SklOth SklTot TrnGain TrnLoss TranLw MeansLw EndsLw ArenaLw PtLw Nation Anomie NegAff PosAff SureLw If NotLw TimeSpc FormLw".split(" ");
-    public static final String[] CATEGORIES_TO_lOOK_FOR = "Positiv Negativ Hostile Strong Power Weak Active Passive Pleasur Pain Virtue Vice Ovrst Undrst Race".split(" ");
-
+    // All categories
+//    public static final String[] CATEGORIES_TO_LOOK_FOR = "Positiv Negativ Pstv Affil Ngtv Hostile Strong Power Weak Submit Active Passive Pleasur Pain Feel Arousal EMOT Virtue Vice Ovrst Undrst Academ Doctrin Econ@ Exch ECON Exprsv Legal Milit Polit@ POLIT Relig Role COLL Work Ritual SocRel Race Kin@ MALE Female Nonadlt HU ANI PLACE Social Region Route Aquatic Land Sky Object Tool Food Vehicle BldgPt ComnObj NatObj BodyPt ComForm COM Say Need Goal Try Means Persist Complet Fail NatrPro Begin Vary Increas Decreas Finish Stay Rise Exert Fetch Travel Fall Think Know Causal Ought Perceiv Compare Eval@ EVAL Solve Abs@ ABS Quality Quan NUMB ORD CARD FREQ DIST Time@ TIME Space POS DIM Rel COLOR Self Our You Name Yes No Negate Intrj IAV DAV SV IPadj IndAdj PowGain PowLoss PowEnds PowAren PowCon PowCoop PowAuPt PowPt PowDoct PowAuth PowOth PowTot RcEthic RcRelig RcGain RcLoss RcEnds RcTot RspGain RspLoss RspOth RspTot AffGain AffLoss AffPt AffOth AffTot WltPt WltTran WltOth WltTot WlbGain WlbLoss WlbPhys WlbPsyc WlbPt WlbTot EnlGain EnlLoss EnlEnds EnlPt EnlOth EnlTot SklAsth SklPt SklOth SklTot TrnGain TrnLoss TranLw MeansLw EndsLw ArenaLw PtLw Nation Anomie NegAff PosAff SureLw If NotLw TimeSpc FormLw".split(" ");
+//    public static final String[] CATEGORIES_TO_LOOK_FOR = "Positiv Negativ Hostile Strong Power Weak Active Passive Pleasur Pain Virtue Vice Ovrst Undrst Race".split(" ");
+    
+    // Categories with more than 3000 hits in either the original or candidate in the training set
+    public static final String[] CATEGORIES_TO_LOOK_FOR = "Positiv Negativ Pstv Affil Ngtv Strong Power Active Passive Ovrst SocRel Quan Time@ Space Self IAV DAV SV PowTot EnlTot TimeSpc".split(" ");
+    
     private HarvardInquirer harvardInquirer;
 
     public HarvardInquirerFeatureExtraction(HarvardInquirer harvardInquirer) {
@@ -78,27 +82,31 @@ public class HarvardInquirerFeatureExtraction implements FeatureExtractor {
         return featureArray;
     }
 
-    private boolean[] extractFeatures(String[] splitSent, String[] arkTags, int trendStart, int trendEnd) {
+    protected boolean[] extractFeatures(String[] splitSent, String[] arkTags, int trendStart, int trendEnd) {
         
-        boolean[] features = new boolean[CATEGORIES_TO_lOOK_FOR.length];
+        boolean[] features = new boolean[CATEGORIES_TO_LOOK_FOR.length];
         
         for(int i = 0; i < splitSent.length; i++) {
             String token = splitSent[i];
 
             if(i < trendStart || i > trendEnd) {
-                for (Map<String, String> entry : harvardInquirer.getEntriesForWord(token)) {
-                    if (hasTag(arkTags[i], entry)) {
-                        for(int index = 0; index < CATEGORIES_TO_lOOK_FOR.length; index++) {
-                            if(entry.containsKey(CATEGORIES_TO_lOOK_FOR[index])) {
-                                features[index] = true;
-                            } 
-                        }
-                    }
-                }
+                setFeatureForToken(token, arkTags[i], features);
             }
         }
         
         return features;
+    }
+    
+    protected void setFeatureForToken(String token, String tag, boolean[] features) {
+        for (Map<String, String> entry : harvardInquirer.getEntriesForWord(token)) {
+            if (hasTag(tag, entry)) {
+                for(int index = 0; index < CATEGORIES_TO_LOOK_FOR.length; index++) {
+                    if(entry.containsKey(CATEGORIES_TO_LOOK_FOR[index])) {
+                        features[index] = true;
+                    } 
+                }
+            }
+        }
     }
 
     private static boolean hasTag(String tag, Map<String, String> entry) {

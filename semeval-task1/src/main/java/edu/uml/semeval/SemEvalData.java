@@ -11,10 +11,10 @@ import cmu.arktweetnlp.Tagger.TaggedToken;
 
 public class SemEvalData {
 
-    //    public static final String TRAINING_DATA_FILE = "dataset/train.data";
-//    public static final String DEV_DATA_FILE = "dataset/dev.data";
-    public static final String TRAINING_DATA_FILE = "semeval-task1/dataset/train.data";
-    public static final String DEV_DATA_FILE = "semeval-task1/dataset/dev.data";
+    public static final String TRAINING_DATA_FILE = "dataset/train.data";
+    public static final String DEV_DATA_FILE = "dataset/dev.data";
+//    public static final String TRAINING_DATA_FILE = "semeval-task1/dataset/train.data";
+//    public static final String DEV_DATA_FILE = "semeval-task1/dataset/dev.data";
 
     private List<Data> dataset;
 
@@ -24,8 +24,8 @@ public class SemEvalData {
 
         dataset = new ArrayList<Data>();
         tagger = new Tagger();
-//        tagger.loadModel("/cmu/arktweetnlp/model.20120919");
-        tagger.loadModel("semeval-task1/resources/ArkTweet/model.ritter_ptb_alldata_fixed.20130723");
+        tagger.loadModel("/cmu/arktweetnlp/model.20120919");
+//        tagger.loadModel("semeval-task1/resources/ArkTweet/model.ritter_ptb_alldata_fixed.20130723");
 
 
         BufferedReader br = new BufferedReader(new FileReader(filePath));

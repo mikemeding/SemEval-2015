@@ -91,9 +91,17 @@ public class BaseFeatureExtractor implements FeatureExtractor {
     protected void calculateFeaturesForNGrams(Set<String> origNGram, Set<String> candNGram, List<Double> features) {
         int intersect = intersection(origNGram, candNGram);
         
-        double precisionNGram = (double) intersect / origNGram.size();
-        double recallNGram = (double) intersect / candNGram.size();
+        double precisionNGram = 0.0;
+        double recallNGram = 0.0;
         double f1NGram = 0.0;
+        
+        if(!origNGram.isEmpty()) {
+            precisionNGram = (double) intersect / origNGram.size();
+        }
+        
+        if(!candNGram.isEmpty()) {
+            recallNGram = (double) intersect / candNGram.size();
+        }
         
         if(precisionNGram + recallNGram > 0.0) {
             f1NGram = 2 * precisionNGram * recallNGram / (precisionNGram + recallNGram);

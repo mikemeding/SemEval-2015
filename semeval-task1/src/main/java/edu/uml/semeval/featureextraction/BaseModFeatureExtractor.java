@@ -47,8 +47,8 @@ public class BaseModFeatureExtractor extends BaseFeatureExtractor {
         
         HashSet<String> set = new HashSet<String>();
         
-        // start to beginning of trend
-        for(int i = 0; i <= trendStart - n + 1; i++) {
+        // start to before beginning of trend
+        for(int i = 0; i < trendStart - n; i++) {
             
             String token = split[i];
             
@@ -59,8 +59,8 @@ public class BaseModFeatureExtractor extends BaseFeatureExtractor {
             set.add(token);
         }
         
-        // end of trend to end of sentence
-        for(int i = trendEnd; i < split.length - (n - 1); i++) {
+        // after end of trend to end of sentence
+        for(int i = trendEnd + 1; i < split.length - (n - 1); i++) {
             
             String token = split[i];
             
