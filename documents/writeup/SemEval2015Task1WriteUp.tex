@@ -46,10 +46,25 @@ Hoanh and I decided that we would do the SemEval 2015 Task 1 which is paraphrase
 \paragraph{} 
 Our first task with this project was to translate the original starting code from Python to Java. Or read stuff...
 
-\section{Double-blind review process}
-\label{sec:blind}
+\section{Base Line}
+The baseline implementation uses a logistic regression model and simple lexical features. The features made uses of unigrams, bigrams, and trigrams of the words and the porter stem of the words. It calculates the precision (intersection verses original ngrams), recall (intersection verses candidate ngrams), and the F1 providing a total of 9 features. Our reimplementation of the baseline was able to achieve an F1 score of just over 0.5 on the dev set after training on the training set. This is comparable to the implementation that was provided.
 
-As the reviewing will be blind, the paper must not include the authors' names and affiliations. Furthermore, self-references that reveal the author's identity, e.g., ``We previously showed (Smith, 1991) ...'' must be avoided. Instead, use citations such as ``Smith previously showed (Smith, 1991) ...'' Papers that do not conform to these requirements will be rejected without review. In addition, please do not post your submissions on the web until after the review process is complete.
+\section{Base Line Modification}
+Our first thought was to see what we could do to improve the baseline. After some time we decided to see what would happen if we simply omitted the trend. So now the features would make uses of ngrams before and after the trend. With that change the F1 score on the dev set went up to over 0.54. Seeing this we elected to have all our features use the same approach of omitting the trend.
+
+\section{Ark Tweet NLP}
+Ark Tweet NLP is a part-of-speech tagger that was built specifically for tweets. In a previous project we created features that looked at ngrams of the tags and those features worked quite well. For this task we followed the idea introduced in the base line and calculated the precision, recall, and F1. The actual F1 score on the dev set was just shy of 0.36.
+
+\section{Harvard General Inquirer}
+The Harvard General Inquirer is a lexical resource that provides a number of categories that a word belongs to. There are 182 categories however most don't show up very often. In the end the categories that we settled on were those that appeared more than 3000 times in the training set. For features we took a bag of words approach and used the categories found in the original and candidate tweets. Aside from that we again calculated the precision, recall, and F1 of the mutual category count verses the category count for the original and candidate tweets. The F1 score of these features was just under 0.31.
+
+\section{SentiWordNet}
+
+\section{Subjective Lexicon}
+
+\section{Wordnet Synonym}
+
+\section{Harvard Inquirer with Wordnet Synonym}
 
 \section*{Acknowledgments}
 
