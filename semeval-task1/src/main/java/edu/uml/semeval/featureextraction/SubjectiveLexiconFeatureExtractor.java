@@ -30,8 +30,13 @@ public class SubjectiveLexiconFeatureExtractor implements FeatureExtractor {
     public double[] extractFeatures(Data data) {
 
         ArrayList<Double> featureList = new ArrayList<>();
-        addSubjectiveLexiconFeatures(data.getOrigCleanSplit(), data.getOrigArkTweet(), data.getOrigTrendStart(), data.getOrigTrendEnd(), featureList);
-        addSubjectiveLexiconFeatures(data.getCandCleanSplit(), data.getCandArkTweet(), data.getCandTrendStart(), data.getCandTrendEnd(), featureList);
+        Counts origCounts = getCounts(data.getOrigCleanSplit(), data.getOrigArkTweet(), data.getOrigTrendStart(), data.getOrigTrendEnd());
+        Counts candCounts = getCounts(data.getCandCleanSplit(), data.getCandArkTweet(), data.getCandTrendStart(), data.getCandTrendEnd());
+        
+        addFeatures(origCounts, featureList);
+        addFeatures(candCounts, featureList);
+        
+        addFeatures(origCounts, candCounts, featureList);
         
         double[] features = new double[featureList.size()];
         for (int i = 0; i < featureList.size(); i++) {
@@ -41,17 +46,9 @@ public class SubjectiveLexiconFeatureExtractor implements FeatureExtractor {
         return features;
     }
     
-    private void addSubjectiveLexiconFeatures(String[] words, String[] tags, int startTrend, int endTrend, List<Double> features) {
+    private Counts getCounts(String[] words, String[] tags, int startTrend, int endTrend) {
 
-        int strongPositiveCount = 0;
-        int strongNegativeCount = 0;
-        int weakPositiveCount = 0;
-        int weakNegativeCount = 0;
-
-        int strongPositiveAdjectiveCount = 0;
-        int strongNegativeAdjectiveCount = 0;
-        int weakPositiveAdjectiveCount = 0;
-        int weakNegativeAdjectiveCount = 0;
+        Counts counts = new Counts();
 
         for (int i = 0; i < words.length; i++) {
 
@@ -64,68 +61,118 @@ public class SubjectiveLexiconFeatureExtractor implements FeatureExtractor {
                     if (entry.isStrongSubjective()) {
 
                         if (entry.getPolarity() == Polarity.BOTH) {
-                            strongPositiveCount++;
-                            strongNegativeCount++;
+                            counts.strongPositiveCount++;
+                            counts.strongNegativeCount++;
                         } else if (entry.getPolarity() == Polarity.NEGATIVE) {
-                            strongNegativeCount++;
+                            counts.strongNegativeCount++;
                         } else if (entry.getPolarity() == Polarity.POSITIVE) {
-                            strongPositiveCount++;
+                            counts.strongPositiveCount++;
                         }
 
                         if (tag == PartOfSpeech.ADJECTIVE) {
                             if (entry.getPolarity() == Polarity.BOTH) {
-                                strongPositiveAdjectiveCount++;
-                                strongNegativeAdjectiveCount++;
+                                counts.strongPositiveAdjectiveCount++;
+                                counts.strongNegativeAdjectiveCount++;
                             } else if (entry.getPolarity() == Polarity.NEGATIVE) {
-                                strongNegativeAdjectiveCount++;
+                                counts.strongNegativeAdjectiveCount++;
                             } else if (entry.getPolarity() == Polarity.POSITIVE) {
-                                strongPositiveAdjectiveCount++;
+                                counts.strongPositiveAdjectiveCount++;
                             }
                         }
 
                     } else {
                         if (entry.getPolarity() == Polarity.BOTH) {
-                            weakPositiveCount++;
-                            weakNegativeCount++;
+                            counts.weakPositiveCount++;
+                            counts.weakNegativeCount++;
                         } else if (entry.getPolarity() == Polarity.NEGATIVE) {
-                            weakNegativeCount++;
+                            counts.weakNegativeCount++;
                         } else if (entry.getPolarity() == Polarity.POSITIVE) {
-                            weakPositiveCount++;
+                            counts.weakPositiveCount++;
                         }
 
                         if (tag == PartOfSpeech.ADJECTIVE) {
                             if (entry.getPolarity() == Polarity.BOTH) {
-                                weakPositiveAdjectiveCount++;
-                                weakNegativeAdjectiveCount++;
+                                counts.weakPositiveAdjectiveCount++;
+                                counts.weakNegativeAdjectiveCount++;
                             } else if (entry.getPolarity() == Polarity.NEGATIVE) {
-                                weakNegativeAdjectiveCount++;
+                                counts.weakNegativeAdjectiveCount++;
                             } else if (entry.getPolarity() == Polarity.POSITIVE) {
-                                weakPositiveAdjectiveCount++;
+                                counts.weakPositiveAdjectiveCount++;
                             }
                         }
                     }
                 }    
             }
         }
+        
+        counts.compareStrong = counts.strongNegativeCount > counts.strongPositiveCount;
+        counts.compareWeak = counts.weakNegativeCount > counts.weakPositiveCount;
+        counts.compareStrongAdjective = counts.strongNegativeAdjectiveCount > counts.strongPositiveAdjectiveCount;
+        counts.compareWeakAdjective = counts.weakNegativeAdjectiveCount > counts.weakPositiveAdjectiveCount;
+        
+        counts.compareWeakToStrong = (counts.weakNegativeCount + counts.weakPositiveCount) > (counts.strongNegativeCount + counts.strongPositiveCount);
+        counts.comparePositiveToNegative = (counts.strongPositiveCount + counts.weakPositiveCount) > (counts.strongNegativeCount + counts.weakNegativeCount);
+        counts.compareWeakToStrongAdjective = (counts.weakNegativeAdjectiveCount + counts.weakPositiveAdjectiveCount) > (counts.strongNegativeAdjectiveCount + counts.strongPositiveAdjectiveCount);
+        counts.comparePositiveToNegativeAdjective = (counts.strongPositiveAdjectiveCount + counts.weakPositiveAdjectiveCount) > (counts.strongNegativeAdjectiveCount + counts.weakNegativeAdjectiveCount);
+        
+        return counts;
+    }
+    
+    private void addFeatures(Counts counts1, Counts counts2, List<Double> features) {
+        
+        features.add(counts1.compareStrong && counts2.compareStrong ? 1.0 : 0.0);
+        features.add(counts1.compareStrongAdjective && counts2.compareStrongAdjective ? 1.0 : 0.0);
+        features.add(counts1.compareWeak && counts2.compareWeak ? 1.0 : 0.0);
+        features.add(counts1.compareWeakAdjective && counts2.compareWeakAdjective ? 1.0 : 0.0);
+        
+        features.add(counts1.comparePositiveToNegative && counts2.comparePositiveToNegative ? 1.0 : 0.0);
+        features.add(counts1.comparePositiveToNegativeAdjective && counts2.comparePositiveToNegativeAdjective ? 1.0 : 0.0);
+        features.add(counts1.compareWeakToStrong && counts2.compareWeakToStrong ? 1.0 : 0.0);
+        features.add(counts1.compareWeakToStrongAdjective && counts2.compareWeakToStrongAdjective ? 1.0 : 0.0);
+    }
+    
+    private void addFeatures(Counts counts, List<Double> features) {
 
-        features.add(strongPositiveCount > 0 ? 1.0 : 0.0);
-        features.add(strongNegativeCount > 0 ? 1.0 : 0.0);
-        features.add(weakPositiveCount > 0 ? 1.0 : 0.0);
-        features.add(weakNegativeCount > 0 ? 1.0 : 0.0);
+        features.add(counts.strongPositiveCount > 0 ? 1.0 : 0.0);
+        features.add(counts.strongNegativeCount > 0 ? 1.0 : 0.0);
+        features.add(counts.weakPositiveCount > 0 ? 1.0 : 0.0);
+        features.add(counts.weakNegativeCount > 0 ? 1.0 : 0.0);
 
-        features.add(strongPositiveAdjectiveCount > 0 ? 1.0 : 0.0);
-        features.add(strongNegativeAdjectiveCount > 0 ? 1.0 : 0.0);
-        features.add(weakPositiveAdjectiveCount > 0 ? 1.0 : 0.0);
-        features.add(weakNegativeAdjectiveCount > 0 ? 1.0 : 0.0);
+        features.add(counts.strongPositiveAdjectiveCount > 0 ? 1.0 : 0.0);
+        features.add(counts.strongNegativeAdjectiveCount > 0 ? 1.0 : 0.0);
+        features.add(counts.weakPositiveAdjectiveCount > 0 ? 1.0 : 0.0);
+        features.add(counts.weakNegativeAdjectiveCount > 0 ? 1.0 : 0.0);
 
-        features.add(strongNegativeCount > strongPositiveCount ? 1.0 : 0.0);
-        features.add(weakNegativeCount > weakPositiveCount ? 1.0 : 0.0);
-        features.add(strongNegativeAdjectiveCount > strongPositiveAdjectiveCount ? 1.0 : 0.0);
-        features.add(weakNegativeAdjectiveCount > weakPositiveAdjectiveCount ? 1.0 : 0.0);
+        features.add(counts.compareStrong ? 1.0 : 0.0);
+        features.add(counts.compareWeak ? 1.0 : 0.0);
+        features.add(counts.compareStrongAdjective ? 1.0 : 0.0);
+        features.add(counts.compareWeakAdjective ? 1.0 : 0.0);
 
-        features.add((weakNegativeCount + weakPositiveCount) > (strongNegativeCount + strongPositiveCount) ? 1.0 : 0.0);
-        features.add((strongPositiveCount + weakPositiveCount) > (strongNegativeCount + weakNegativeCount) ? 1.0 : 0.0);
-        features.add((weakNegativeAdjectiveCount + weakPositiveAdjectiveCount) > (strongNegativeAdjectiveCount + strongPositiveAdjectiveCount) ? 1.0 : 0.0);
-        features.add((strongPositiveAdjectiveCount + weakPositiveAdjectiveCount) > (strongNegativeAdjectiveCount + weakNegativeAdjectiveCount) ? 1.0 : 0.0);
+        features.add(counts.compareWeakToStrong ? 1.0 : 0.0);
+        features.add(counts.comparePositiveToNegative ? 1.0 : 0.0);
+        features.add(counts.compareWeakToStrongAdjective ? 1.0 : 0.0);
+        features.add(counts.comparePositiveToNegativeAdjective ? 1.0 : 0.0);
+    }
+    
+    private class Counts {
+        int strongPositiveCount = 0;
+        int strongNegativeCount = 0;
+        int weakPositiveCount = 0;
+        int weakNegativeCount = 0;
+
+        int strongPositiveAdjectiveCount = 0;
+        int strongNegativeAdjectiveCount = 0;
+        int weakPositiveAdjectiveCount = 0;
+        int weakNegativeAdjectiveCount = 0;
+        
+        boolean compareStrong = false;
+        boolean compareWeak = false;
+        boolean compareStrongAdjective = false;
+        boolean compareWeakAdjective = false;
+        
+        boolean compareWeakToStrong = false;
+        boolean comparePositiveToNegative = false;
+        boolean compareWeakToStrongAdjective = false;
+        boolean comparePositiveToNegativeAdjective = false;
     }
 }

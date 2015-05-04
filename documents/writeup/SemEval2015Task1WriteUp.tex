@@ -59,10 +59,13 @@ Ark Tweet NLP is a part-of-speech tagger that was built specifically for tweets.
 The Harvard General Inquirer is a lexical resource that provides a number of categories that a word belongs to. There are 182 categories however most don't show up very often. In the end the categories that we settled on were those that appeared more than 3000 times in the training set. For features we took a bag of words approach and used the categories found in the original and candidate tweets. Aside from that we again calculated the precision, recall, and F1 of the mutual category count verses the category count for the original and candidate tweets. The F1 score of these features was just under 0.31.
 
 \section{SentiWordNet}
+SentiWordNet is a lexical resource that provides sentiment scores for words. Each SentiWordNet entry contains five explicit attributes (part-of-speech, id, positive score, negative score, synset terms, and glossary) and an implicit attribute (objective which is 1 - positive score - negative score). The intuition behind using sentiment is if one statement has a positive sentiment and the other has a negative sentiment then it would likely not be a paraphrase. The features we implemented were scores divided by entry count, if there are more negative entries than positive entries, scores divided by non-zero score entry count, scores for adjectives divided by non-zero score entry count, and binary features for majority counts. These features looked at each statement individually. Most of these features were inspired by the Opinion Mining Using SentiWordNet paper. Some features that looked at both statements were binary features that check if both had majority score or counts. The F1 score of these features was around 0.06.
 
-\section{Subjective Lexicon}
+\section{MPQA Subjective Lexicon}
+The MPQA Subjectivity Lexicon contains entries and provide the strength of the subjectivity and polarity. For this resource we created a number of binary features. The features compare the number of negative polarity counts to positive polarity counts and another was designed to compare the total number of weak counts to strong counts and negative counts to positive counts. The F1 score of these features was about 0.13.
 
 \section{Wordnet Synonym}
+
 
 \section{Harvard Inquirer with Wordnet Synonym}
 

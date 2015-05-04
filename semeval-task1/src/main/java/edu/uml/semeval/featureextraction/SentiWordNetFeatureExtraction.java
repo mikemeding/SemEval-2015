@@ -36,7 +36,7 @@ public class SentiWordNetFeatureExtraction implements FeatureExtractor {
         addFeatures(origFeatures, featureList);
         addFeatures(candFeatures, featureList);
         
-//        addFeature(origFeatures, candFeatures, featureList);
+        addFeature(origFeatures, candFeatures, featureList);
         
         double[] features = new double[featureList.size()];
         for (int i = 0; i < featureList.size(); i++) {
@@ -101,7 +101,6 @@ public class SentiWordNetFeatureExtraction implements FeatureExtractor {
         int nonZeroPositiveAdjectiveCount = 0;
         int nonZeroNegativeAdjectiveCount = 0;
         int nonZeroObjectiveAdjectiveCount = 0;
-
         
         for(int i = 0; i < words.length; i++) {
             
