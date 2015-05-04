@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/W32TeX) (preloaded format=pdflatex 2015.3.6)  2 MAY 2015 22:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/W32TeX) (preloaded format=pdflatex 2015.3.6)  4 MAY 2015 19:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -74,37 +74,27 @@ LaTeX Font Info:    Try loading font information for OT1+pcr on input line 40.
 (c:/texlive/2014/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-Underfull \hbox (badness 1215) in paragraph at lines 42--43
-\OT1/ptm/m/n/10 de-scrip-tion is as fol-lows, Given two sen-
- []
-
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 47.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
  [1{c:/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
 
 
-] [2
-
-]
-(./SemEval2015Task1WriteUp.aux) ) 
+] [2] (./SemEval2015Task1WriteUp.aux) ) 
 Here is how much of TeX's memory you used:
  358 strings out of 493109
  4639 string characters out of 6138588
- 60967 words of memory out of 5000000
+ 58967 words of memory out of 5000000
  3870 multiletter control sequences out of 15000+600000
  16542 words of font info for 41 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  22i,9n,19p,1064b,256s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/texlive/2014/texmf-dist/fonts/enc/dvips/ba
-se/8r.enc}<c:/texlive/2014/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/te
-xlive/2014/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/2014/texmf-d
-ist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on SemEval2015Task1WriteUp.pdf (2 pages, 45371 bytes).
+{c:/texlive/2014/texmf-dist/fonts/enc/dv
+ips/base/8r.enc}<c:/texlive/2014/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
+<c:/texlive/2014/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/2014/t
+exmf-dist/fonts/type1/urw/times/utmr8a.pfb>
+Output written on SemEval2015Task1WriteUp.pdf (2 pages, 47838 bytes).
 PDF statistics:
  24 PDF objects out of 1000 (max. 8388607)
  16 compressed objects within 1 object stream
