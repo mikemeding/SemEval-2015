@@ -53,12 +53,38 @@ SemEval provides all of its tasks with data for use with evaluating the results 
 extremely time consuming and frustrating. We also did not have any kind of verification of our data set so the accuracy left much to be desired. Luckily, the data sets which were provided to us for this task are both consistent and accurate. Below is an example of the data provided to us.
 
 % insert table here
-
+% | Topic_Id | Topic_Name | Sent_1 | Sent_2 | Label | Sent_1_tag | Sent_2_tag |
 % add explanation of the data set and why it is organized that way.
 
+% The "Trending_Topic_Name" are the names of trends provided by Twitter, which are
+%  not hashtags.
+  
+The "Sent\_1" and "Sent\_2" are the two sentences, which are not necessarily full 
+tweets. Tweets were tokenized (thanks to Brendan O'Connor et al.) and 
+split into sentences. 
+ 
+The "Label" column is in a format such like "(1, 4)", which means among 5 votes 
+from Amazon Mechanical turkers only 1 is positive and 4 are negative. We would 
+suggest map them to binary labels as follows:
+paraphrases: (3, 2) (4, 1) (5, 0)
+non-paraphrases: (1, 4) (0, 5)
+debatable: (2, 3)  which you may discard if training binary classifier
+The "Sent\_1\_tag" and "Sent\_2\_tag" are the two sentences with part-of-speech 
+and named entity tags (thanks to Alan Ritter). 
+
 \section{Base Line}
-The baseline implementation used a logistic regression model and simple lexical features. The features made uses of unigrams, bigrams, and trigrams of the words and the porter stem of the words. It calculates the precision (intersection verses original ngrams), recall (intersection verses candidate ngrams), and the F1 providing a total of 9 features. Our reimplementation of the baseline was able to achieve an F1 score of just over 0.5 on the dev set after training on the training set. This is only slightly worse than the implementation that was provided. The results from the given Python baseline was 0.6 for the F1 score which with later tweeks we managed to get very close to.
+The baseline implementation used a logistic regression model and simple lexical features. The features made uses of unigrams, bigrams, and trigrams of the words and the porter stem of the words. It calculates the precision (intersection verses original ngrams), recall (intersection verses candidate ngrams), and the F1 providing a total of 9 features. Our reimplementation of the baseline was able to achieve an F1 score of just over 0.5 on the dev set after training on the training set. This is only slightly worse than the implementation that was provided. The results from the given Python baseline was 0.5 for the F1 score which with later tweeks we managed to get very close to.
+
 % baseline results table
+
+\section{Data}
+% data organization and 
+The data which was provided to us was consisted of two files, a training data set and a development data set. The training data set consisted of 13063 Tweet pairs and the development data set consisted of 4727 Tweet pairs. These data sets were organized as tab separated values categorized as such,
+
+% insert table showing categories and examples
+% | Topic_Id | Topic_Name | Sent_1 | Sent_2 | Label | Sent_1_tag | Sent_2_tag |
+ 
+% Talk about what the trending topic names and how it relates to our
 
 \section{Base Line Modification}
 
@@ -70,10 +96,12 @@ Our first thought was to see what we could do to improve the baseline. After som
 Ark Tweet NLP is a part-of-speech tagger that was built specifically for Tweets. In a previous project we created features that looked at ngrams of the tags and those features worked quite well. For this task we followed the idea introduced in the original python baseline and calculated the precision, recall, and F1. The actual F1 score on the dev set was just shy of 0.36. % was this for our baseline or theirs?
 
 \section{Harvard General Inquirer}
-The Harvard General Inquirer is a lexical resource that provides a number of categories that a word belongs to. There are 182 categories however most don't show up very often. In the end the categories that we settled on were those that appeared more than 3000 times in the training set. For features we took a bag of words approach and used the categories found in the original and candidate tweets. Aside from that we again calculated the precision, recall, and F1 of the mutual category count verses the category count for the original and candidate tweets. The F1 score of these features was just under 0.31.
+The Harvard General Inquirer is a lexical resource that provides a number of categories that a word belongs to. There are 182 categories however most don't show up very often. For our data set the Harvard Inquirer categories that we settled on were those that appeared more than 3000 times in the training set. For features we took a bag of words approach and used the categories found in the original and candidate tweets. Aside from that we again calculated the precision, recall, and F1 of the mutual category count verses the category count for the original and candidate tweets. The F1 score of these features was just under 0.31.
 
 \section{SentiWordNet}
-SentiWordNet is a lexical resource that provides sentiment scores for words. Each SentiWordNet entry contains five explicit attributes (part-of-speech, id, positive score, negative score, synset terms, and glossary) and an implicit attribute (objective which is 1 - positive score - negative score). The intuition behind using sentiment is if one statement has a positive sentiment and the other has a negative sentiment then it would likely not be a paraphrase. The features we implemented were scores divided by entry count, if there are more negative entries than positive entries, scores divided by non-zero score entry count, scores for adjectives divided by non-zero score entry count, and binary features for majority counts. These features looked at each statement individually. Most of these features were inspired by the Opinion Mining Using SentiWordNet paper. Some features that looked at both statements were binary features that check if both had majority score or counts. The F1 score of these features was around 0.06.
+SentiWordNet is a lexical resource that provides sentiment scores for words. Each SentiWordNet entry contains five explicit attributes (part-of-speech, id, positive score, negative score, synset terms, and glossary) and an implicit attribute (objective which is 1 - positive score - negative score). 
+% table here showing what sentiwordnet looks like
+The intuition behind using sentiment is if one statement has a positive sentiment and the other has a negative sentiment then it would likely not be a paraphrase. The features we implemented were scores divided by entry count, if there are more negative entries than positive entries, scores divided by non-zero score entry count, scores for adjectives divided by non-zero score entry count, and binary features for majority counts. These features looked at each statement individually. Most of these features were inspired by the Opinion Mining Using SentiWordNet paper. Some features that looked at both statements were binary features that check if both had majority score or counts. The F1 score of these features was around 0.06.
 
 %Quantifiy results of sentiword net alone... Need table
 
