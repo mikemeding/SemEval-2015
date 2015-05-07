@@ -27,13 +27,28 @@ public class WordnetSynonymFeatureExtractor implements FeatureExtractor {
         Set<String> origSynWordSet = synonyms(origWordSet);
         Set<String> candSynWordSet = synonyms(candWordSet);
         
-        features.add((double)intersection(origWordSet, candSynWordSet) / origWordSet.size());
-        features.add((double)intersection(candWordSet, origSynWordSet) / candWordSet.size());
+//        int synonymIntersection = intersection(origSynWordSet, candSynWordSet);
         
-        int synonymIntersection = intersection(origSynWordSet, candSynWordSet);
         
-        features.add((double)synonymIntersection / origSynWordSet.size());
-        features.add((double)synonymIntersection / candSynWordSet.size());
+        double precisionNGram = 0.0;
+        double recallNGram = 0.0;
+        double f1NGram = 0.0;
+        
+        if(!origSynWordSet.isEmpty()) {
+            precisionNGram = (double) intersection(origWordSet, candSynWordSet) / origWordSet.size();
+        }
+        
+        if(!candSynWordSet.isEmpty()) {
+            recallNGram = (double) intersection(origSynWordSet, candWordSet) / candWordSet.size();
+        }
+        
+        if(precisionNGram + recallNGram > 0.0) {
+            f1NGram = 2 * precisionNGram * recallNGram / (precisionNGram + recallNGram);
+        }
+        
+        features.add(precisionNGram); 
+        features.add(recallNGram);
+        features.add(f1NGram);
         
         double[] featureArray = new double[features.size()];
         for (int i = 0; i < features.size(); i++) {
