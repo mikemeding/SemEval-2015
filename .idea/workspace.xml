@@ -2,30 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7bc97a65-7ca2-4127-8c5f-ef8d86962494" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/documents/writeup/SemEval2015Task1WriteUp.bbl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/semeval-task1/src/main/java/edu/uml/lexicon/ChatspeakTranslator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_lucene_lucene_analyzers_3_3_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_lucene_lucene_wordnet_3_3_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/semeval-task1/resources/ChatspeakTranslator/NetlingoLexicon.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/documents/writeup/SemEval2015Task1WriteUp.blg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/semeval-task1/src/main/java/edu/uml/semeval/featureextraction/NegationFeatureExtractor.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documents/writeup/SemEval2015Task1WriteUp.pdf" afterPath="$PROJECT_DIR$/documents/writeup/SemEval2015Task1WriteUp.pdf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documents/writeup/SemEval2015Task1WriteUp.synctex.gz" afterPath="$PROJECT_DIR$/documents/writeup/SemEval2015Task1WriteUp.synctex.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/dev.data.cpt" afterPath="$PROJECT_DIR$/data/dev.data.cpt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/test.data.cpt" afterPath="$PROJECT_DIR$/data/test.data.cpt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/test.label.cpt" afterPath="$PROJECT_DIR$/data/test.label.cpt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/train.data.cpt" afterPath="$PROJECT_DIR$/data/train.data.cpt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/trial.unlabeled.cpt" afterPath="$PROJECT_DIR$/data/trial.unlabeled.cpt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/semeval-task1/src/main/java/edu/uml/semeval/Data.java" afterPath="$PROJECT_DIR$/semeval-task1/src/main/java/edu/uml/semeval/Data.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/semeval-task1/src/main/java/edu/uml/semeval/featureextraction/HarvardInquirerFeatureExtraction.java" afterPath="$PROJECT_DIR$/semeval-task1/src/main/java/edu/uml/semeval/featureextraction/HarvardInquirerFeatureExtraction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/semeval-task1/src/main/java/edu/uml/semeval/MLTest.java" afterPath="$PROJECT_DIR$/semeval-task1/src/main/java/edu/uml/semeval/MLTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documents/writeup/SemEval2015Task1WriteUp.aux" afterPath="$PROJECT_DIR$/documents/writeup/SemEval2015Task1WriteUp.aux" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documents/writeup/SemEval2015Task1WriteUp.log" afterPath="$PROJECT_DIR$/documents/writeup/SemEval2015Task1WriteUp.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documents/writeup/SemEval2015Task1WriteUp.tex.bak" afterPath="$PROJECT_DIR$/documents/writeup/SemEval2015Task1WriteUp.tex.bak" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documents/writeup/SemEval2015Task1WriteUp.tex" afterPath="$PROJECT_DIR$/documents/writeup/SemEval2015Task1WriteUp.tex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/semeval-task1/src/main/java/edu/uml/semeval/SemEvalData.java" afterPath="$PROJECT_DIR$/semeval-task1/src/main/java/edu/uml/semeval/SemEvalData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/semeval-task1/semeval-task1.iml" afterPath="$PROJECT_DIR$/semeval-task1/semeval-task1.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SemEval-2015.iws" />
@@ -55,9 +38,10 @@
       <file leaf-file-name="ChatspeakTranslator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/semeval-task1/src/main/java/edu/uml/lexicon/ChatspeakTranslator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1061" max-vertical-offset="2268">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1548" max-vertical-offset="2196">
               <caret line="92" column="0" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
               <folding>
+                <element signature="imports" expanded="false" />
                 <element signature="e#2184#2185#0" expanded="false" />
                 <element signature="e#2245#2246#0" expanded="false" />
               </folding>
@@ -68,7 +52,7 @@
       <file leaf-file-name="SemEvalData.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/semeval-task1/src/main/java/edu/uml/semeval/SemEvalData.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.1733704" vertical-offset="0" max-vertical-offset="2214">
+            <state vertical-scroll-proportion="0.9001387" vertical-offset="197" max-vertical-offset="2484">
               <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -90,9 +74,24 @@
       <file leaf-file-name="SentiWordNetEntry.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/semeval-task1/src/main/java/edu/uml/lexicon/SentiWordNetEntry.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="936">
+            <state vertical-scroll-proportion="0.0" vertical-offset="36" max-vertical-offset="936">
               <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-              <folding />
+              <folding>
+                <element signature="e#724#725#0" expanded="false" />
+                <element signature="e#750#751#0" expanded="false" />
+                <element signature="e#776#777#0" expanded="false" />
+                <element signature="e#801#802#0" expanded="false" />
+                <element signature="e#841#842#0" expanded="false" />
+                <element signature="e#877#878#0" expanded="false" />
+                <element signature="e#918#919#0" expanded="false" />
+                <element signature="e#955#956#0" expanded="false" />
+                <element signature="e#995#996#0" expanded="false" />
+                <element signature="e#1031#1032#0" expanded="false" />
+                <element signature="e#1069#1070#0" expanded="false" />
+                <element signature="e#1103#1104#0" expanded="false" />
+                <element signature="e#1135#1136#0" expanded="false" />
+                <element signature="e#1163#1164#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -100,9 +99,12 @@
       <file leaf-file-name="HarvardInquirerFeatureExtraction.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/semeval-task1/src/main/java/edu/uml/semeval/featureextraction/HarvardInquirerFeatureExtraction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="486" max-vertical-offset="3042">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1236" max-vertical-offset="3078">
               <caret line="19" column="40" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#2249#2257#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -124,9 +126,10 @@
       <file leaf-file-name="MLTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/semeval-task1/src/main/java/edu/uml/semeval/MLTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="840" max-vertical-offset="3312">
+            <state vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="2844">
               <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
               <folding>
+                <element signature="imports" expanded="false" />
                 <element signature="e#1687#1705#0" expanded="false" />
                 <element signature="e#4868#4876#0" expanded="false" />
               </folding>
@@ -215,8 +218,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -668,12 +671,14 @@
       <workItem from="1430834363694" duration="4429000" />
       <workItem from="1430839323387" duration="3149000" />
       <workItem from="1430842482220" duration="3790000" />
-      <workItem from="1430846611093" duration="1798000" />
+      <workItem from="1430846611093" duration="2231000" />
+      <workItem from="1430876759438" duration="4073000" />
+      <workItem from="1430881436999" duration="990000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37062000" />
+    <option name="totallyTimeSpent" value="42558000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="6" />
@@ -690,7 +695,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22487047" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22487047" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -728,7 +733,15 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="22" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/semeval-task1/src/main/java/edu/uml/semeval/SemEvalData.java</url>
+          <line>75</line>
+          <properties />
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="24" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -741,7 +754,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1955" max-vertical-offset="2880">
           <caret line="73" column="27" selection-start-line="72" selection-start-column="7" selection-end-line="75" selection-end-column="8" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#2249#2257#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -788,6 +804,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="628" max-vertical-offset="3312">
           <caret line="54" column="53" selection-start-line="52" selection-start-column="8" selection-end-line="54" selection-end-column="53" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="e#1687#1705#0" expanded="false" />
             <element signature="e#4868#4876#0" expanded="false" />
           </folding>
@@ -817,6 +834,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="21" max-vertical-offset="558">
           <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="e#2184#2185#0" expanded="false" />
             <element signature="e#2245#2246#0" expanded="false" />
           </folding>
@@ -827,7 +845,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2880">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#2249#2257#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -867,6 +888,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="1440" max-vertical-offset="3276">
           <caret line="80" column="30" selection-start-line="80" selection-start-column="30" selection-end-line="80" selection-end-column="30" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="e#1687#1705#0" expanded="false" />
             <element signature="e#4868#4876#0" expanded="false" />
           </folding>
@@ -919,6 +941,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3024">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="e#1687#1705#0" expanded="false" />
             <element signature="e#4868#4876#0" expanded="false" />
           </folding>
@@ -978,6 +1001,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3024">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="e#1687#1705#0" expanded="false" />
             <element signature="e#4868#4876#0" expanded="false" />
           </folding>
@@ -1118,6 +1142,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="840" max-vertical-offset="3312">
           <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="e#1687#1705#0" expanded="false" />
             <element signature="e#4868#4876#0" expanded="false" />
           </folding>
@@ -1136,6 +1161,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="1536" max-vertical-offset="2304">
           <caret line="92" column="0" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="e#2184#2185#0" expanded="false" />
             <element signature="e#2245#2246#0" expanded="false" />
           </folding>
@@ -1146,7 +1172,33 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="936">
           <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding />
+          <folding>
+            <element signature="e#724#725#0" expanded="false" />
+            <element signature="e#750#751#0" expanded="false" />
+            <element signature="e#776#777#0" expanded="false" />
+            <element signature="e#801#802#0" expanded="false" />
+            <element signature="e#841#842#0" expanded="false" />
+            <element signature="e#877#878#0" expanded="false" />
+            <element signature="e#918#919#0" expanded="false" />
+            <element signature="e#955#956#0" expanded="false" />
+            <element signature="e#995#996#0" expanded="false" />
+            <element signature="e#1031#1032#0" expanded="false" />
+            <element signature="e#1069#1070#0" expanded="false" />
+            <element signature="e#1103#1104#0" expanded="false" />
+            <element signature="e#1135#1136#0" expanded="false" />
+            <element signature="e#1163#1164#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/semeval-task1/src/main/java/edu/uml/semeval/featureextraction/HarvardInquirerFeatureExtraction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1236" max-vertical-offset="3078">
+          <caret line="19" column="40" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#2249#2257#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1158,17 +1210,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/semeval-task1/src/main/java/edu/uml/semeval/featureextraction/HarvardInquirerFeatureExtraction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="486" max-vertical-offset="3042">
-          <caret line="19" column="40" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/semeval-task1/src/main/java/edu/uml/semeval/SemEvalData.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.1733704" vertical-offset="0" max-vertical-offset="2214">
+        <state vertical-scroll-proportion="0.9001387" vertical-offset="197" max-vertical-offset="2484">
           <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />

@@ -68,11 +68,26 @@ public class SemEvalData {
                         origCleanSplit, origTrendStart, origTrendEnd,
                         candCleanSplit, candTrendStart, candTrendEnd,
                         arkTag(origClean), arkTag(candClean));
+//                Data datapoint = new Data(split[0], trendname, origsent, candsent, paraphrase, arkTagToString(origClean),
+//                        arkTagToString(candClean), trendnameCleanSplit,
+//                        origCleanSplit, origTrendStart, origTrendEnd,
+//                        candCleanSplit, candTrendStart, candTrendEnd,
+//                        arkTag(origClean), arkTag(candClean));
                 dataset.add(datapoint);
             }
         }
 
         br.close();
+    }
+
+    private String arkTagToString(String str){
+        String[] arkTagString = arkTag(str);
+        StringBuilder sb = new StringBuilder();
+        for(String item : arkTagString){
+            sb.append(item);
+            sb.append(" ");
+        }
+        return sb.toString();
     }
 
     private String cleanString(String str) {

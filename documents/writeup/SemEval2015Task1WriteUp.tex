@@ -1,15 +1,14 @@
 %
-% File naaclhlt2013.tex
 %
-
+%
 \documentclass[11pt,letterpaper]{article}
 \usepackage{naaclhlt2013}
 \usepackage{times}
 \usepackage{latexsym}
+\usepackage{tabularx}
 \setlength\titlebox{6.5cm}    % Expanding the titlebox
 
 \title{SemEval 2015 Task 1: Paraphrase and Semantic Similarity in Twitter}
-
 \author{
 	Michael Meding\\
   	University Massachusetts Lowell\\
@@ -23,7 +22,6 @@
 	Lowell, MA 01854, USA\\
 	{\tt hoanh.lam.nguyen@gmail.com }
 }
-
 \date{}
 %	PAPER MUST INCLUDE
 % a. an abstract, describing briefly what you have done and results you obtained
@@ -35,131 +33,273 @@
 %       - experimental setup and and evaluation methods;
 %   f. description of your results.
 %   g. discussion of results, conclusions of your study, future directions for this work
-
 \begin{document}
 \maketitle
+
 \begin{abstract}
-Hoanh and I decided that we would do the SemEval 2015 Task 1 for our NLP project this semester. This task involves paraphrase and semantic similarity in Twitter which is formalized as follows, Given two sentences, the participants are asked to determine whether they express the same or very similar meaning and optionally a degree score between 0 and 1. Following the literature on paraphrase identification, we evaluate system performance primarily by the F-1 score and Accuracy against human judgements. 
+Hoanh and I decided that we would do the SemEval 2015 Task 1 for our NLP project this semester. This task involves paraphrase and semantic similarity in Twitter. The task is formalized as follows, Given two sentences, the participants are asked to determine whether they express the same or very similar meaning and optionally a degree score between 0 and 1. Following the literature on paraphrase identification, we evaluate system performance primarily by the F-1 score and Accuracy against human judgements. 
 \end{abstract}
 
 \section{Introduction}
 \paragraph{} 
-Our first task with this project was to translate the original starting code from Python to Java. This required rewriting both the main logistic regression function to a Hidden Markov Model with no hidden layers and to rewrite the data parser so as to interface with the same data that was given to us for this task.
-
-% more explanation of how long this took
-
-\section{Data}
-SemEval provides all of its tasks with data for use with evaluating the results of your work. In our prior Twitter project we hand annotated our own data set which was 
-extremely time consuming and frustrating. We also did not have any kind of verification of our data set so the accuracy left much to be desired. Luckily, the data sets which were provided to us for this task are both consistent and accurate. Below is an example of the data provided to us.
-
-% insert table here
-% | Topic_Id | Topic_Name | Sent_1 | Sent_2 | Label | Sent_1_tag | Sent_2_tag |
-% add explanation of the data set and why it is organized that way.
-
-% The "Trending_Topic_Name" are the names of trends provided by Twitter, which are
-%  not hashtags.
-  
-The "Sent\_1" and "Sent\_2" are the two sentences, which are not necessarily full 
-tweets. Tweets were tokenized (thanks to Brendan O'Connor et al.) and 
-split into sentences. 
- 
-The "Label" column is in a format such like "(1, 4)", which means among 5 votes 
-from Amazon Mechanical turkers only 1 is positive and 4 are negative. We would 
-suggest map them to binary labels as follows:
-paraphrases: (3, 2) (4, 1) (5, 0)
-non-paraphrases: (1, 4) (0, 5)
-debatable: (2, 3)  which you may discard if training binary classifier
-The "Sent\_1\_tag" and "Sent\_2\_tag" are the two sentences with part-of-speech 
-and named entity tags (thanks to Alan Ritter). 
+Our first task with this project was to translate the original starting code from Python to Java. This required rewriting both the main logistic regression function to a Hidden Markov Model that as of this writing has no hidden layers. A good section of this rewriting was dedicated to the representation of our data which we both agreed was poor in the python model. This required us to rewrite the data parser so as to interface with the same data but in a manner that would also interact nicely with our Java based Hidden Markov Model. Doing this required a significant amount of time longer than we had initially intended. Concurrently we were also researching further topics and ideas for features for when this implementation was actually finished. When this Python to Java conversion was finally finished and receiving F-Scores nearly equal to those of the original python code we began experimenting with several features that we were both familiar with. Namely, SentiWordNet as this lexical resource was pivotal in our prior project.
 
 \section{Base Line}
-The baseline implementation used a logistic regression model and simple lexical features. The features made uses of unigrams, bigrams, and trigrams of the words and the porter stem of the words. It calculates the precision (intersection verses original ngrams), recall (intersection verses candidate ngrams), and the F1 providing a total of 9 features. Our reimplementation of the baseline was able to achieve an F1 score of just over 0.5 on the dev set after training on the training set. This is only slightly worse than the implementation that was provided. The results from the given Python baseline was 0.5 for the F1 score which with later tweeks we managed to get very close to.
+\paragraph{}
+The baseline implementation used a logistic regression model and simple lexical features. The features made uses of unigrams, bigrams, and trigrams of the words and the porter stem of the words. It calculates the precision which is defined as the intersection verses original ngrams, recall which is defined as the intersection verses candidate ngrams and the F1 (F-Score) which is a measure of both precision and accuracy. Improving the F-Score was our primary objective for this project. Our reimplementation of the baseline was able to achieve an F1 score of just over 0.5 on the development set after training on the supplied training set. This is only slightly worse than the Python logistic regression model that was provided. The results from the given Python baseline was 0.5 for the F-Score which after some interesting modifications. Namely, excluding the trending topic from the tweet entirely. After these modifications it put us right around the starting F-Score of the original Python implementation.
 
 % baseline results table
 
+\section{Related Work}
+\paragraph{}
+% talk about the papers from those who had done much better than we had
+This specific task appeared in the SemEval competition in 2014 having different data and slightly different baseline. One of the starting points of our project was to read some of the papers published after this first competition such as \cite{Div-Para} which detailed some of the major teams high level implementations. This allowed us to get a good idea of the approach others had taken some far more complicated than others. Often the teams which had a well refined and simple supervised approach would do better than those who had chosen to do a complicated unsupervised approach.
+
+
 \section{Data}
-% data organization and 
-The data which was provided to us was consisted of two files, a training data set and a development data set. The training data set consisted of 13063 Tweet pairs and the development data set consisted of 4727 Tweet pairs. These data sets were organized as tab separated values categorized as such,
+\paragraph{}
+SemEval provides all of its tasks with data for use with evaluating the results of your work. In our prior Twitter project we hand annotated our own data set which was extremely time consuming and frustrating. We also did not have any kind of verification of our data set so the accuracy left much to be desired. Luckily, the data sets which were provided to us for this task are both consistent and verified by multiple passes from turkers.
+\paragraph{}
+The data which was provided to us was consisted of two files, a training data set and a development data set. The training data set consisted of 13063 Tweet pairs and the development data set consisted of 4727 Tweet pairs. These data sets were organized as tab separated values organized as shown by Table~\ref{provided-data}.
 
-% insert table showing categories and examples
+%%% SemEval 2015 corpus example table %%%
 % | Topic_Id | Topic_Name | Sent_1 | Sent_2 | Label | Sent_1_tag | Sent_2_tag |
- 
-% Talk about what the trending topic names and how it relates to our
+%4	1st QB	EJ Manuel the 1st QB to go in this draft	But my bro from the 757 EJ Manuel is the 1st QB gone	(5, 0)	EJ/B-person/NNP/B-NP/O Manuel/I-person/NNP/B-VP/O the/O/DT/B-NP/O 1st/O/CD/I-NP/O QB/O/NNP/I-NP/O to/O/TO/B-VP/O go/O/VB/I-VP/B-EVENT in/O/IN/B-PP/I-EVENT this/O/DT/B-NP/O draft/O/NN/I-NP/O	But/O/CC/O/O my/O/PRP$/B-NP/O bro/O/NN/I-NP/O from/O/IN/B-PP/O the/O/DT/B-NP/O 757/O/CD/I-NP/O EJ/B-person/NNP/I-NP/O Manuel/I-person/NNP/I-NP/O is/O/VBZ/B-VP/O the/O/DT/B-NP/O 1st/O/CD/I-NP/O QB/O/NNP/I-NP/O gone/O/NN/I-NP/O
+\begin{table}
+\begin{center}
+\begin{tabularx}{190pt}{|c|c|}
+\hline
+\bf Topic ID \\
+\hline
+\ 4 \\
+\hline
+\bf Trending Topic Name \\
+\hline
+\ 1st QB\\
+\hline
+\bf Sent 1 \\
+\hline
+\ EJ Manuel the 1st QB to go in this draft \\
+\hline
+\bf Sent 2 \\
+\hline
+\ But my bro from the 757 EJ Manuel is\\ 
+\ the 1st QB gone \\
+\hline
+\bf Label \\
+\hline
+\ (5, 0) \\
+\hline
+\bf Sent 1 Tagged \\
+\hline
+\ EJ/B-person/NNP/B-NP/O \\
+\ Manuel/I-person/NNP/B-VP/O \\
+\ the/O/DT/B-NP/O 1st/O/CD/I-NP/O \\
+\ QB/O/NNP/I-NP/O to/O/TO/B-VP/O \\
+\ go/O/VB/I-VP/B-EVENT \\
+\ in/O/IN/B-PP/I-EVENT \\ 
+\ this/O/DT/B-NP/O \\ 
+\ draft/O/NN/I-NP/O \\
+\hline
+\bf Sent 2 Tagged \\
+\hline
+\ But/O/CC/O/O my/O/PRP\$/B-NP/O \\
+\ bro/O/NN/I-NP/O \\ 
+\ from/O/IN/B-PP/O the/O/DT/B-NP/O \\
+\ 757/O/CD/I-NP/O \\
+\ EJ/B-person/NNP/I-NP/O \\
+\ Manuel/I-person/NNP/I-NP/O \\
+\ is/O/VBZ/B-VP/O the/O/DT/B-NP/O \\ 
+\ 1st/O/CD/I-NP/O QB/O/NNP/I-NP/O \\
+\ gone/O/NN/I-NP/O \\
+\hline
+\end{tabularx}
+\end{center}
+\caption{\label{provided-data} Raw data row example from the SemEval 2015 Training data set }
+\end{table}
 
-\section{Base Line Modification}
+\paragraph{}
+The "Trending Topic Name" are the names of trends provided by Twitter, which are not hashtags but rather a trending topic between the two Tweets if any exists. This does necessary indicate that a paraphrase exists, only that there is a similar topic between the two. 
+The "Sent 1" and "Sent 2" are the two sentences, which are not necessarily full tweets. Tweets were tokenized and split into sentences or as close to sentences as Tweets can get.
+The "Label" column is in a format such like "(1, 4)", which means among a total of 5 votes 
+from Amazon Mechanical turkers only 1 is positive and 4 are negative. We mapped these values to binary labels as follows,
+paraphrases: (3, 2) (4, 1) (5, 0), non-paraphrases: (1, 4) (0, 5), ignored: (2, 3) as we are training binary classifier.
+The "Sent 1 Tagged" and "Sent 2 Taggged" are the two sentences with part-of-speech and named entity tags. 
 
+\paragraph{}
+% Talk about what the trending topic names and how it relates to our project
+
+\section{Initial Base Line Modification}
 %What trend? What is the trend and how does it look?
+\paragraph{}
+Our first thought was to see what we could do to improve the baseline. After some time and research we decided to see what would happen if we simply omitted the trending topic name from both Tweets being compared. Our intuition behind this is that if two Tweets share a trending topic which is directly mentioned in both Tweets then by removing them would expose the true differences between them. If they were still very close after having removed the trending topics then the likelihood that they are paraphrases of each other would be higher. This turned out to be true and is reflected in our results bringing us from below the inital baseline score to right around the original baseline. Addtionally, the latter features would make use of ngrams generated from this both before and after the trending topic was removed from the original Tweet.
 
-Our first thought was to see what we could do to improve the baseline. After some time and research we decided to see what would happen if we simply omitted the trend. So now the features would make uses of ngrams before and after the trend. With that change the F1 score on the dev set went up to over 0.54. Seeing this we elected to have all our features use the same approach of omitting the trend.
+% before and after table needed here
+
+%\paragraph{}
+%After applying this to our model the F-score on the development set went up to over 0.54. This is an improvement of .04 over the original baseline. Seeing this we elected to have all our features use the same approach of omitting the trend before extracting their features.
 
 \section{Ark Tweet NLP}
-Ark Tweet NLP is a part-of-speech tagger that was built specifically for Tweets. In a previous project we created features that looked at ngrams of the tags and those features worked quite well. For this task we followed the idea introduced in the original python baseline and calculated the precision, recall, and F1. The actual F1 score on the dev set was just shy of 0.36. % was this for our baseline or theirs?
+\paragraph{}
+Ark Tweet NLP is a part-of-speech tagger that was built specifically for Tweets by the folks at Carnegie Mellon. In a previous project we created features that looked at n-grams and the part-of-speech tags. Those features worked quite well but for that project so we continued on that trend using a similar approach for our current project. For this task we followed the idea introduced in the original python baseline and calculated the precision, recall, and F1 scores. The actual F1 score on the dev set was just shy of 0.36 for the original python baseline. % was this for our baseline or theirs?
 
 \section{Harvard General Inquirer}
+\paragraph{}
 The Harvard General Inquirer is a lexical resource that provides a number of categories that a word belongs to. There are 182 categories however most don't show up very often. For our data set the Harvard Inquirer categories that we settled on were those that appeared more than 3000 times in the training set. For features we took a bag of words approach and used the categories found in the original and candidate tweets. Aside from that we again calculated the precision, recall, and F1 of the mutual category count verses the category count for the original and candidate tweets. The F1 score of these features was just under 0.31.
 
 \section{SentiWordNet}
+\paragraph{}
 SentiWordNet is a lexical resource that provides sentiment scores for words. Each SentiWordNet entry contains five explicit attributes (part-of-speech, id, positive score, negative score, synset terms, and glossary) and an implicit attribute (objective which is 1 - positive score - negative score). 
-% table here showing what sentiwordnet looks like
-The intuition behind using sentiment is if one statement has a positive sentiment and the other has a negative sentiment then it would likely not be a paraphrase. The features we implemented were scores divided by entry count, if there are more negative entries than positive entries, scores divided by non-zero score entry count, scores for adjectives divided by non-zero score entry count, and binary features for majority counts. These features looked at each statement individually. Most of these features were inspired by the Opinion Mining Using SentiWordNet paper. Some features that looked at both statements were binary features that check if both had majority score or counts. The F1 score of these features was around 0.06.
+
+%%% SentiWordNet corpus example table %%%
+\begin{table}
+\begin{center}
+\begin{tabularx}{183pt}{|c|c|c|c|}
+\hline
+\bf POS & \bf P & \bf N & \bf Term \\ 
+\hline
+\ n & 0 & 0.5 & spoiler\#1 \\
+\ n & 0.125 & 0.125 & supermodel\#1 \\
+\ n & 0.375 & 0.25 & swaggerer\#1 \\
+\ n & 0 & 0.5 & affinity\#2 \\
+\hline
+\end{tabularx}
+\end{center}
+\caption{\label{sentiword-table} ~SentiWordNet corpus example. Glossary and ID removed due to size restriction. }
+\end{table}
+
+\paragraph{}
+The intuition behind using sentiment is if one statement has a positive sentiment and the other has a negative sentiment then the two Tweets being analysed are unlikely to be discussing the same topic. The features we implemented using SentiWordNet were scores divided by entry count, if there are more negative entries than positive entries, scores divided by non-zero score entry count, scores for adjectives divided by non-zero score entry count, and binary features for majority counts. These features looked at each statement individually. Most of these features were inspired by Opinion Mining Using SentiWordNet paper. % need citation
+ Some features that looked at both statements were binary features that check if both had majority score or counts. The F1 score of these features was around 0.06.
 
 %Quantifiy results of sentiword net alone... Need table
 
+\paragraph{}
 Our first experiment after establishing a good baseline was to score the tweets based on word level sentiment. We preformed a crude run with sentiment weighted heavily to see if we could get any kind of result. This unfortunately was quite bad and did not yield an improvement of any kind. We pushed a bit further by attempting to score the entire tweet and getting an average for comparison but the results were equally as bad. During this time we had acquired Willie Boag's Twitter sentiment code from a prior SemEval competition to see if his sentiment analyser could improve on our crude model. However, after seeing the dismal results using only a crude model we decided that it would be of more value to pursue other features to improve our model.
 
 \section{MPQA Subjective Lexicon}
+\paragraph{}
 The MPQA Subjectivity Lexicon contains entries and provide the strength of the subjectivity and polarity. For this resource we created a number of binary features. The features compare the number of negative polarity counts to positive polarity counts and another was designed to compare the total number of weak counts to strong counts and negative counts to positive counts. The F1 score of these features was about 0.13.
 
 
 \section{Wordnet Synonym}
-
-%Need an inital explanation...
+\paragraph{}
+WordNet is a large lexical database of English. Nouns, verbs, adjectives and adverbs are grouped into sets of synonyms called synsets. Synsets are interlinked by of semantic and lexical relations. This is similar to thesaurus, in that it groups words together based on their meanings. However, there are some differences. First, WordNet interlinks not just words as strings of letters but also specific senses of words. As a result, words that are found in close proximity to one another in the network are semantically disambiguated. Second, WordNet labels the semantic relations among words, whereas the groupings of words in a thesaurus does not follow any explicit pattern other than meaning similarity.
 
 \section{Harvard Inquirer with Wordnet Synonym}
+
+\section{Chat Speak Translator}
+\paragraph{}
+After spending some time looking at the raw data and attempting to come up with ways to improve our numbers we noticed that the data contained chat speak abbreviations such as QB for quarter-back or TTY for talk to you later which was common in our data set. So to attempt to normalize this we used a chat speak translation lexicon built from the Netlingo chat speak dictionary. The lexicon is simple with simply tab separated values with the initialism on one side and the translation on the other. 
+\paragraph{}
+Of course one would expect that by normalizing these values we would see some improvement reflected in our results. Strangely however, normalizing the values actually had the opposite effect. We saw all values, precision, recall, and F-score suffer by around .01 as shown by comparing the results shown in Table~\ref{chatspeak-without-table} and Table~\ref{chatspeak-with-table}.
+
+
+ %%% Without Chatspeak Translator %%%
+\begin{table}
+\begin{center}
+\begin{tabularx}{111pt}{|c|c|}
+\hline
+\bf Training & \bf Data \\ 
+\hline
+\ Precision & 0.773 \\
+\ Recall & 0.611 \\
+\ F1-Score & 0.680 \\
+\hline
+\bf Development & \bf Data \\ 
+\hline
+\ Precision & 0.774 \\
+\ Recall & 0.416 \\
+\ F1-Score & 0.542 \\
+\hline
+\end{tabularx}
+\end{center}
+\caption{\label{chatspeak-without-table} Metrics {\bf without} the Chat Speak Translator applied }
+\end{table}
+
+ %%% With Chatspeak Translator %%%
+\begin{table}
+\begin{center}
+\begin{tabularx}{111pt}{|c|c|}
+\hline
+\bf Training & \bf Data \\ 
+\hline
+\ Precision & 0.762 \\
+\ Recall & 0.600 \\
+\ F1-Score & 0.672 \\
+\hline
+\bf Development & \bf Data \\ 
+\hline
+\ Precision & 0.756 \\
+\ Recall & 0.408 \\
+\ F1-Score & 0.530 \\
+\hline
+\end{tabularx}
+\end{center}
+\caption{\label{chatspeak-with-table} Metrics {\bf with} the Chat Speak Translator applied }
+\end{table}
+
 
 \section{Final Results}
 % table of our results by comparision to others
 % This is quite a large table...
 
+\section{Future Improvements}
 
 \section*{Acknowledgments}
 
+%%%  Referances  %%%
+\begin{thebibliography}{}
+
+\bibitem[\protect\citename{Extracting Lexically Divergent Paraphrases for Twitter}2014]{Divergent-Paraphrases}
+Wei Xu, Alan Ritter, Chris Callison-Burch, Willam B. Dolan and Yengfeng Ji
+\newblock 2014.
+\newblock {\em Extracting Lexically Divergent Paraphrases for Twitter}.
+\newblock University of Pennsylvania, Philadelphia, PA, USA.
+\newblock The Ohio State University, Columbus, OH, USA.
+\newblock Microsoft Research, Redmond, WA, USA.
+\newblock Georgia Institute of Technology, Atlanta, GA, USA.
+
+\bibitem[\protect\citename{Named Entity Recognition in Tweets: An Experimental Study}2014]{Twitter-NER}
+Alan Ritter, Sam Clark, Mausam and Oren Etzioni
+\newblock 2014.
+\newblock {\em Named Entity Recognition in Tweets: An Experimental Study}
+\newblock Computer Science and Engineering, University of Washington.
+\newblock Seattle, WA 98125, USA.
+
+\bibitem[\protect\citename{Data Driven Approaches for Paraphrasing Across Language Variations}]{Wei-Xu-Dissertation}
+Wei Xu
+\newblock January 2014.
+\newblock {\em Data Driven Approaches for Paraphrasing Across Language Variations}
+\newblock Department of Computer Science, New York University.
+\newblock New York, New York, USA.
+
+\bibitem[\protect\citename{Advanced NLP: Automatic Summarization}]{Automatic Summarization} 
+Andrew Goldberg
+\newblock March 16, 2007
+\newblock {\em Advanced NLP: Automatic Summarization}
+
+\bibitem[\protect\citename{SemEval2015 Task Summery and Intro}]{SemEval2015-Summery}
+Wei Xu, Chris Callison-Burch and Willam B. Dolan
+
+\newblock University of Pennsylvania and Microsoft Research.
+\newblock Philadelphia, PA, USA.
+\newblock Redmond, WA, USA.
+
+\bibitem[\protect\citename{Porting and Evaluation of Automatic Summarization}]{Porting-Text-Summerization}
+Hercules Dilanis, Martin Hassel, Koenraad de Smedt, Anja Liseth, Till Christopher Lech, Jurgen Wedenkind
+\newblock {\em Porting and Evaluation of Automatic Summarization}
+\newblock KTH Stockholm.
+\newblock University of Bergen.
+\newblock CognIT Norway.
+\newblock CST Copenhagen.
+
+\bibitem[\protect\citename{Paraphrase Identification on the Basis of Supervised Machine Learning Techniques}]{Paraphrase-Identification}
+Zornitsa Kozareva and Andres Montoyo
+\newblock {\em Paraphrase Identification on the Basis of Supervised Machine Learning Techniques}
+\newblock Departmento de Leguajes y Sistemas Informaticos, Universidad de Alicate
 
 
-% be sure to document all references saved for this project in the references folder
-
-%\begin{thebibliography}{}
-
-%\bibitem[\protect\citename{Aho and Ullman}1972]{Aho:72}
-%Alfred~V. Aho and Jeffrey~D. Ullman.
-%\newblock 1972.
-%\newblock {\em The Theory of Parsing, Translation and Compiling}, volume~1.
-%\newblock Prentice-{Hall}, Englewood Cliffs, NJ.
-%
-%\bibitem[\protect\citename{{American Psychological Association}}1983]{APA:83}
-%{American Psychological Association}.
-%\newblock 1983.
-%\newblock {\em Publications Manual}.
-%\newblock American Psychological Association, Washington, DC.
-%
-%\bibitem[\protect\citename{{Association for Computing Machinery}}1983]{ACM:83}
-%{Association for Computing Machinery}.
-%\newblock 1983.
-%\newblock {\em Computing Reviews}, 24(11):503--512.
-%
-%\bibitem[\protect\citename{Chandra \bgroup et al.\egroup }1981]{Chandra:81}
-%Ashok~K. Chandra, Dexter~C. Kozen, and Larry~J. Stockmeyer.
-%\newblock 1981.
-%\newblock Alternation.
-%\newblock {\em Journal of the Association for Computing Machinery},
-%  28(1):114--133.
-%
-%\bibitem[\protect\citename{Gusfield}1997]{Gusfield:97}
-%Dan Gusfield.
-%\newblock 1997.
-%\newblock {\em Algorithms on Strings, Trees and Sequences}.
-%\newblock Cambridge University Press, Cambridge, UK.
-
-%\end{thebibliography}
+\end{thebibliography}
 
 \end{document}
