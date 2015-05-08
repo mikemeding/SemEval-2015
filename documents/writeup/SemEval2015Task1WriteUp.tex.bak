@@ -188,11 +188,11 @@ The MPQA Subjectivity Lexicon contains entries and provide the strength of the s
 WordNet is a large lexical database of English. Nouns, verbs, adjectives and adverbs are grouped into sets of synonyms called synsets. Synsets are interlinked by of semantic and lexical relations. This is similar to thesaurus, in that it groups words together based on their meanings. However, there are some differences. First, WordNet interlinks not just words as strings of letters but also specific senses of words. As a result, words that are found in close proximity to one another in the network are semantically disambiguated. Second, WordNet labels the semantic relations among words, whereas the groupings of words in a thesaurus does not follow any explicit pattern other than meaning similarity \cite{wordnet}.
 
 \paragraph{}
-For our implementation of Wordnet we took all the words, got all the synonyms for all words in a given tweet, and placed all of it in to a set. Then we calculate the precision, recall, and F1 in a similar way to that of our baseline except we calculate the intersection from the words to the words and their synonyms in the second Tweet. The F1 score of these features was close to 0.54.
+For our implementation of Wordnet we took all the words, got all the synonyms for all words in a given tweet, and placed all of it in to a set. Then we calculate the precision, recall, and F1 in a similar way to that of our baseline except we calculate the intersection from the words to the words and their synonyms in the second given Tweet. The F1 score after applying this method close to 0.54 which can be seen in our results Table~\ref{final-results-dev}.
 
 % this needs work
-\paragraph{}
-Many words have a number of synonyms associated with them. A resource that was able to give us synonyms of a word was Wordnet. So we take all the words, get the synonyms for those words, and put all of it in to a set. Then we calculate the precision, recall, and F1 similar the way the baseline does except we calculate the intersection of the words to the words plus synonyms of the other statement. The F1 score of these features was close to 0.54.
+%\paragraph{}
+%Many words have a number of synonyms associated with them. A resource that was able to give us synonyms of a word was Wordnet. So we take all the words, get the synonyms for those words, and put all of it in to a set. Then we calculate the precision, recall, and F1 similar the way the baseline does except we calculate the intersection of the words to the words plus synonyms of the other statement. The F1 score of these features was close to 0.54.
 
 
 \section{Harvard Inquirer with Wordnet Synonym}
