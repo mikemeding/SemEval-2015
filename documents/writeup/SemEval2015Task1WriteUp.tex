@@ -182,9 +182,7 @@ For our implementation of Wordnet, we took all the words, got all the synonyms f
 
 \section{Harvard Inquirer with Wordnet Synonym}
 \paragraph{}
-blahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblah
-blahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblah
-blahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblah
+Since the WordNet synonym feature worked well we decided to combine it with the Harvard Inquirer feature extractor. Basically we use the Harvard Inquirer features with the synonyms. With more words the chances of flag being turned on was slightly higher, we assume that synonyms tend to be in the same categories. While these features had slightly better precision they did not have as good recall as the original. In the end it achieved an F-Score of 0.25 on the dev set.
 
 \section{Chat Speak Translator}
 \paragraph{}
@@ -195,10 +193,10 @@ Of course one would expect that by normalizing these values we would see some im
 
 
 \section{Final Results}
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
+After trying several network configurations and mix and matching features we ended up with something that was slightly better than our modified base features. Simply using all features and adding layers gave us a worse score than our best feature. What we ended up with was a two layer network using the base modification, Ark Tweet, Harvard General Inquirer, and WordNet synonyms to achieve an F-Score of 0.57.
+
+% best, 0.800, 0.760, 0.616, 0.680, 0.757, 0.761, 0.457, 0.571
+
 % table of our results by comparision to others
 % This is quite a large table..
 

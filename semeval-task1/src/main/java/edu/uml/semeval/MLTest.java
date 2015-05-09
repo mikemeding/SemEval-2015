@@ -5,9 +5,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.uml.lexicon.ChatspeakTranslator;
+//import edu.uml.lexicon.ChatspeakTranslator;
 import org.apache.lucene.wordnet.SynonymMap;
 import org.encog.Encog;
+import org.encog.engine.network.activation.ActivationSigmoid;
 import org.encog.engine.network.activation.ActivationSoftMax;
 import org.encog.ml.MLRegression;
 import org.encog.ml.data.MLData;
@@ -21,29 +22,33 @@ import org.encog.neural.networks.layers.BasicLayer;
 import org.encog.neural.networks.training.propagation.resilient.ResilientPropagation;
 
 import edu.uml.lexicon.HarvardInquirer;
+import edu.uml.lexicon.SentiWordNet;
+import edu.uml.lexicon.SubjectiveLexicon;
 import edu.uml.semeval.featureextraction.ArkTweetNgramFeatureExtractor;
 import edu.uml.semeval.featureextraction.BaseFeatureExtractor;
 import edu.uml.semeval.featureextraction.BaseModFeatureExtractor;
 import edu.uml.semeval.featureextraction.FeatureExtractor;
 import edu.uml.semeval.featureextraction.HarvardInquirerFeatureExtraction;
+import edu.uml.semeval.featureextraction.HarvardInquirerWithWordnetSynonymFeatureExtractor;
+import edu.uml.semeval.featureextraction.SentiWordNetFeatureExtraction;
+import edu.uml.semeval.featureextraction.SubjectiveLexiconFeatureExtractor;
 import edu.uml.semeval.featureextraction.WordnetSynonymFeatureExtractor;
 
 public class MLTest {
 
     public static void main(String[] args) throws IOException {
 
-        HarvardInquirer harvardInquirer = new HarvardInquirer("semeval-task1/resources/Harvard_inquirer/inqtabs.txt");
-        SynonymMap synonymMap = new SynonymMap(new FileInputStream("semeval-task1/resources/Wordnet/prolog/wn_s.pl"));
-        ChatspeakTranslator chatspeakTranslator = new ChatspeakTranslator();
+        HarvardInquirer harvardInquirer = new HarvardInquirer("resources/Harvard_inquirer/inqtabs.txt");
+        SynonymMap synonymMap = new SynonymMap(new FileInputStream("resources/Wordnet/prolog/wn_s.pl"));
+//        ChatspeakTranslator chatspeakTranslator = new ChatspeakTranslator();
 
         ArrayList<FeatureExtractor> featureExtractors = new ArrayList<FeatureExtractor>();
-        featureExtractors.add(new BaseFeatureExtractor());
+//        featureExtractors.add(new BaseFeatureExtractor());
         featureExtractors.add(new BaseModFeatureExtractor());
         featureExtractors.add(new ArkTweetNgramFeatureExtractor());
         // Negation detection feature extractor
 
 
-//        featureExtractors.add(new HarvardInquirerFeatureExtraction(new HarvardInquirer("resources/Harvard_inquirer/inqtabs.txt")));
         featureExtractors.add(new HarvardInquirerFeatureExtraction(harvardInquirer));
 //        featureExtractors.add(new SentiWordNetFeatureExtraction(new SentiWordNet("resources/SentiWordNet/SentiWordNet_3.0.0_20130122.txt")));
 //        featureExtractors.add(new SubjectiveLexiconFeatureExtractor(new SubjectiveLexicon("resources/SubjectiveLexicon/subjclueslen1-HLTEMNLP05.tff")));
@@ -66,7 +71,7 @@ public class MLTest {
         int numberOfIterations = 1000;
         BasicNetwork network = new BasicNetwork();
         network.addLayer(new BasicLayer(null, true, trainingData.getInputSize()));
-//        network.addLayer(new BasicLayer(new ActivationSigmoid(), true, 20));
+        network.addLayer(new BasicLayer(new ActivationSigmoid(), true, 100));
         network.addLayer(new BasicLayer(new ActivationSoftMax(), true, 2));
         network.getStructure().finalizeStructure();
         network.reset();
