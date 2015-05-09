@@ -5,6 +5,7 @@
 \usepackage{naaclhlt2013}
 \usepackage{times}
 \usepackage{latexsym}
+\usepackage{graphicx}
 \usepackage{tabularx}
 \setlength\titlebox{6.5cm}    % Expanding the titlebox
 
@@ -176,13 +177,12 @@ The MPQA Subjectivity Lexicon contains entries and provide the strength of the s
 \section{Wordnet Synonym}
 \paragraph{}
 WordNet is a large lexical database of English. Nouns, verbs, adjectives, and adverbs are grouped into sets of synonyms called synsets. Synsets are interlinked by of semantic and lexical relations. This is similar to Thesaurus because it groups words together based on their meanings. However, there are some differences. First, WordNet interlinks not just words as strings of letters but also specific senses of words. As a result, words that are found in close proximity to one another in the network are semantically disambiguated. Second, WordNet labels the semantic relations among words, whereas the groupings of words in a thesaurus does not follow any explicit pattern other than meaning similarity \cite{wordnet}.
-
 \paragraph{}
 For our implementation of Wordnet, we took all the words, got all the synonyms for all words in a given tweet, and placed all of it in to a set. Then we calculate the precision, recall, and F-Score in a similar way to that of our baseline, except we calculate the intersection from the words to the words and their synonyms in the second given Tweet. The F-Score, after applying this method, close to 0.54 which can be seen in our results Table~\ref{final-results-dev}.
 
 \section{Harvard Inquirer with Wordnet Synonym}
 \paragraph{}
-Since the WordNet synonym feature worked well we decided to combine it with the Harvard Inquirer feature extractor. Basically we use the Harvard Inquirer features with the synonyms. With more words the chances of flag being turned on was slightly higher, we assume that synonyms tend to be in the same categories. While these features had slightly better precision they did not have as good recall as the original. In the end it achieved an F-Score of 0.25 on the dev set.
+Since the WordNet synonym feature worked well we decided to combine it with the Harvard Inquirer feature. We used the Harvard Inquirer features with the all of the words and their synonyms. With more words being put into the Harvard Inquirer feature our chances of a flag being turned on was slightly higher. We also operating under the assumption that synonyms tend to be in the same categories as their root word. While these two features combined had slightly better precision they did not have as good recall. Our final results therefore were quite low, only achieving an F-Score of 0.25 on the development set.
 
 \section{Chat Speak Translator}
 \paragraph{}
@@ -190,22 +190,16 @@ After spending some time looking at the raw data and attempting to come up with 
 \paragraph{}
 Of course one would expect that by normalizing these values we would see some improvement reflected in our results. Strangely however, normalizing the values actually had the opposite effect. We saw all values, precision, recall, and F-score suffer by around .01 as shown by comparing the results shown in Table~\ref{chatspeak-without-table} and Table~\ref{chatspeak-with-table}.
 
-
-
 \section{Final Results}
-After trying several network configurations and mix and matching features we ended up with something that was slightly better than our modified base features. Simply using all features and adding layers gave us a worse score than our best feature. What we ended up with was a two layer network using the base modification, Ark Tweet, Harvard General Inquirer, and WordNet synonyms to achieve an F-Score of 0.57.
+After trying several neural network configurations incorporating a mix of features, we ended up with something that was slightly better than our modified base features. Simply using all of the features we developed gave us a score which was worse than our best feature alone. Our final configuration was a two layer neural network using the modified base features, Ark Tweet, Harvard General Inquirer, and WordNet synonyms. This gave us a final F-Score of 0.57 as can be seen in the table on Page~\pageref{SemEval2015-Results}.
 
-% best, 0.800, 0.760, 0.616, 0.680, 0.757, 0.761, 0.457, 0.571
+%\section{Future Improvements}
+%blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
 
-% table of our results by comparision to others
-% This is quite a large table..
 
-\section{Future Improvements}
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
 \section*{Acknowledgments}
+\paragraph{}
+We would like to acknowledge {\bf Alison Rose} for her ability to edit our horrible grammar despite not knowing what we are even writing about. Without her skills this paper would have been near unreadable.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%                     TABLES                                             %%%%%%%%%
@@ -213,7 +207,7 @@ blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
 
 
  %%% Without Chatspeak Translator %%%
-\begin{table}[htp]
+\begin{table}[p]
 \begin{center}
 \begin{tabularx}{111pt}{|c|c|}
 \hline
@@ -235,7 +229,7 @@ blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
 \end{table}
 
  %%% With Chatspeak Translator %%%
-\begin{table}[htp]
+\begin{table}[p]
 \begin{center}
 \begin{tabularx}{111pt}{|c|c|}
 \hline
@@ -258,13 +252,16 @@ blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
 
 \clearpage
 
+% best, 0.800, 0.760, 0.616, 0.680, 0.757, 0.761, 0.457, 0.571
+
  %%% Training data set final results %%%
 \begin{table}[htp]
 \begin{center}
 \begin{tabularx}{374pt}{|c|c|c|c|c|}
 \hline
-\bf features & \bf train accuracy & \bf train precision &\bf train recall &\bf train F1 \\
+\bf feature & \bf train accuracy & \bf train precision &\bf train recall &\bf train F1 \\
 \hline
+\ \bf best &\bf 0.800 &\bf 0.760 &\bf 0.616 &\bf 0.680 \\
 \ base & 0.790 & 0.744 & 0.601 & 0.665 \\
 \ mod & 0.792 & 0.763 & 0.578 & 0.658 \\
 \ ark & 0.683 & 0.592 & 0.277 & 0.377 \\
@@ -284,8 +281,9 @@ blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
 \begin{center}
 \begin{tabularx}{347pt}{|c|c|c|c|c|}
 \hline
-\bf features & \bf dev accuracy &\bf dev precision &\bf dev recall & \bf dev F1 \\
+\bf feature & \bf dev accuracy &\bf dev precision &\bf dev recall & \bf dev F1 \\
 \hline
+\ \bf best &\bf 0.757 &\bf 0.761 &\bf 0.457 &\bf 0.571 \\
 \ base & 0.735 & 0.746 & 0.384 & 0.507 \\
 \ mod & 0.751 & 0.771 & 0.424 & 0.547 \\
 \ ark & 0.678 & 0.612 & 0.254 & 0.358 \\
@@ -299,6 +297,16 @@ blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
 \end{center}
 \caption{\label{final-results-dev} Our final {\bf development set} results for single layer neural network with softmax }
 \end{table}
+
+%%% FINAL RESULTS COMPARISION TABLE %%%
+%SemEval2015Results.png
+\begin{figure*}[htp]
+\centering
+\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{SemEval2015Results}
+\label{SemEval2015-Results}
+%\includegraphics{SemEval2015Results}
+\end{figure*}
+
 
 \clearpage
 % features, train_accuracy, train_precision, train_recall, train_f1, dev_accuracy, dev_precision, dev_recall, dev_f1
@@ -319,6 +327,7 @@ blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
 % subjective, 0.646, 0.509, 0.074, 0.129
 % wordnet, 0.745, 0.748, 0.422, 0.540
 % harvardWithWordnet, 0.652, 0.634, 0.161, 0.248
+
 
 
 %%%  Referances  %%%
@@ -379,8 +388,5 @@ Christiane Fellbaum
 \newblock Cambridge, MA, USA.
 \newblock MIT Press
 
-
-
 \end{thebibliography}
-
 \end{document}
