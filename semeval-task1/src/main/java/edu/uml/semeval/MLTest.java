@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 //import edu.uml.lexicon.ChatspeakTranslator;
 import org.apache.lucene.wordnet.SynonymMap;
 import org.encog.Encog;
@@ -19,8 +21,10 @@ import org.encog.ml.data.basic.BasicMLDataSet;
 import org.encog.ml.train.MLTrain;
 import org.encog.neural.networks.BasicNetwork;
 import org.encog.neural.networks.layers.BasicLayer;
+import org.encog.neural.networks.training.propagation.back.Backpropagation;
 import org.encog.neural.networks.training.propagation.resilient.ResilientPropagation;
 
+import cmu.arktweetnlp.Tagger;
 import edu.uml.lexicon.HarvardInquirer;
 import edu.uml.lexicon.SentiWordNet;
 import edu.uml.lexicon.SubjectiveLexicon;
@@ -38,6 +42,9 @@ public class MLTest {
 
     public static void main(String[] args) throws IOException {
 
+        Tagger tagger = new Tagger();
+        tagger.loadModel("/cmu/arktweetnlp/model.20120919");
+        
         HarvardInquirer harvardInquirer = new HarvardInquirer("resources/Harvard_inquirer/inqtabs.txt");
         SynonymMap synonymMap = new SynonymMap(new FileInputStream("resources/Wordnet/prolog/wn_s.pl"));
 //        ChatspeakTranslator chatspeakTranslator = new ChatspeakTranslator();
@@ -47,7 +54,6 @@ public class MLTest {
         featureExtractors.add(new BaseModFeatureExtractor());
         featureExtractors.add(new ArkTweetNgramFeatureExtractor());
         // Negation detection feature extractor
-
 
         featureExtractors.add(new HarvardInquirerFeatureExtraction(harvardInquirer));
 //        featureExtractors.add(new SentiWordNetFeatureExtraction(new SentiWordNet("resources/SentiWordNet/SentiWordNet_3.0.0_20130122.txt")));
@@ -60,11 +66,13 @@ public class MLTest {
 //        System.out.println("Current dir:"+current);
 //        featureExtractors.add(new HarvardInquirerFeatureExtraction(new HarvardInquirer(current+"/semeval-task1/resources/Harvard_inquirer/inqtabs.txt")));
 
-        SemEvalData rawTrainData = new SemEvalData(SemEvalData.TRAINING_DATA_FILE);
-        SemEvalData rawDevData = new SemEvalData(SemEvalData.DEV_DATA_FILE);
+        SemEvalData rawTrainData = new SemEvalData(tagger, "dataset/train.data");
+        SemEvalData rawDevData = new SemEvalData(tagger, "dataset/dev.data");
+        SemEvalData rawTestData = new SemEvalData(tagger, "dataset/test.data", "dataset/test.label");
 
         MLDataSet trainingData = buildDataSet(rawTrainData, featureExtractors);
         MLDataSet devData = buildDataSet(rawDevData, featureExtractors);
+        MLDataSet testData = buildDataSet(rawTestData, featureExtractors);
 
         System.out.println("Dataset built!");
 
@@ -95,6 +103,10 @@ public class MLTest {
 
         System.out.println("Dev: ");
         printResults(mlRegression, devData);
+        Encog.getInstance().shutdown();
+        
+        System.out.println("Test: ");
+        printResults(mlRegression, testData);
         Encog.getInstance().shutdown();
     }
 

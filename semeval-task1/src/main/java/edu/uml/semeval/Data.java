@@ -124,8 +124,9 @@ public class Data {
 
     @Override
     public String toString() {
-        return "Data [trendid=" + trendid + ", trendname=" + trendname + ", origsent=" + origsent
-                + ", candsent=" + candsent + ", origsenttag=" + origsenttag + ", candsenttag="
-                + candsenttag + ", paraphrase=" + paraphrase + "]";
+        return "Data [trendname=" + trendname + ", origsent=" + origsent + ", candsent=" + candsent
+                + ", origTrendStart=" + origTrendStart + ", origTrendEnd=" + origTrendEnd
+                + ", candTrendStart=" + candTrendStart + ", candTrendEnd=" + candTrendEnd
+                + ", paraphrase=" + paraphrase + "]";
     }
 }
