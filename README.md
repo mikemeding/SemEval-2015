@@ -4,8 +4,8 @@ Making an attempt at SemEval 2015 task 1
 ## Final Results ##
 
 ### Training: ###
-tp = 2467.0, tn = 6791.0, fp = 743.0, fn = 1529.0
-9258 of 11530 correctly tagged... 0.802948829141370
+> tp = 2467.0, tn = 6791.0, fp = 743.0, fn = 1529.0
+> 9258 of 11530 correctly tagged... 0.802948829141370
 
 | measure | score |
 | --------- | ---------------- |
