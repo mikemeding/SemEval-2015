@@ -1,6 +1,8 @@
 # SemEval-2015
 Making an attempt at SemEval 2015 task 1 
 
+Hoanh and I decided to take a crack at the SemEval paraphrase evaluation task 1. We split up the work as follows, Hoanh wrote the neural network which integrated each of the word feature extrators. The final configuration of this network contained 2 hidden layers with back propogation. Our results from this are listed in the tables below. I on the other hand worked on the data analsys writing both a parser and preprocessor to feed the neural network in addition to handling all documents and references.
+
 ## Final Results (run 1) ##
 
 ### Training: ###
