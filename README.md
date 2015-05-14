@@ -5,7 +5,8 @@ Making an attempt at SemEval 2015 task 1
 
 ### Training: ###
 > tp = 2467.0, tn = 6791.0, fp = 743.0, fn = 1529.0
-> 9258 of 11530 correctly tagged... 0.802948829141370
+
+9258 of 11530 correctly tagged... 0.802948829141370
 
 | measure | score |
 | --------- | ---------------- |
@@ -14,7 +15,8 @@ Making an attempt at SemEval 2015 task 1
 | f1 | 0.6847071884540661 |
 
 ### Dev: ###
-tp = 640.0, tn = 2468.0, fp = 204.0, fn = 830.0
+> tp = 640.0, tn = 2468.0, fp = 204.0, fn = 830.0
+
 3108 of 4142 correctly tagged... 0.7503621438918396
 
 | measure | score |
@@ -25,7 +27,8 @@ tp = 640.0, tn = 2468.0, fp = 204.0, fn = 830.0
 
 
 ### Test: ###
-tp = 95.0, tn = 613.0, fp = 50.0, fn = 80.0
+> tp = 95.0, tn = 613.0, fp = 50.0, fn = 80.0
+
 708 of 838 correctly tagged... 0.8448687350835322
 
 | measure | score |
@@ -35,7 +38,8 @@ tp = 95.0, tn = 613.0, fp = 50.0, fn = 80.0
 | f1 | 0.5937499999999999 |
 
 ### Training: ###
-tp = 2470.0, tn = 6769.0, fp = 765.0, fn = 1526.0
+> tp = 2470.0, tn = 6769.0, fp = 765.0, fn = 1526.0
+
 9239 of 11530 correctly tagged... 0.8013009540329575
 
 | measure | score |
@@ -46,7 +50,8 @@ tp = 2470.0, tn = 6769.0, fp = 765.0, fn = 1526.0
 
 
 ### Dev: ###
-tp = 651.0, tn = 2466.0, fp = 206.0, fn = 819.0
+> tp = 651.0, tn = 2466.0, fp = 206.0, fn = 819.0
+
 3117 of 4142 correctly tagged... 0.7525350072428778
 
 | measure | score |
@@ -56,7 +61,8 @@ tp = 651.0, tn = 2466.0, fp = 206.0, fn = 819.0
 | f1 | 0.559518693596906 |
 
 ### Test: ###
-tp = 94.0, tn = 621.0, fp = 42.0, fn = 81.0
+> tp = 94.0, tn = 621.0, fp = 42.0, fn = 81.0
+
 715 of 838 correctly tagged... 0.8532219570405728
 
 | measure | score |
